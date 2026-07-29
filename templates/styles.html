@@ -20,6 +20,26 @@
 
     <input type="text" placeholder="Enter your name">
 
+    <h2>Assignments</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Assignment(s)</th>
+                <th>Due Date(s)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for tag in tags %}
+            <tr>
+                <td>{{ tag[0] }}</td>
+                <td>{{ tag[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <br><br>
 
     <a href="/">Back Home</a>
