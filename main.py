@@ -20,16 +20,10 @@ def index():
     return render_template("index.html")
 
 
-
-
-
-
-
-
 @app.route('/tags/<tag_type>')
 def render_webpage(tag_type):
     title = tag_type.upper()
-    query = "SELECT tag, description FROM html_tags WHERE type=?"
+    query = "SELECT id, tag, description FROM html_tags WHERE type=?"
     con = create_connection(DATABASE)
     print(con)
     cur = con.cursor()
@@ -43,4 +37,3 @@ def render_webpage(tag_type):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=81, debug=True)
-    

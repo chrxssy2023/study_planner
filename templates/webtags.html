@@ -12,13 +12,13 @@
     <nav>
         <ul>
             <li>
-                Home
+                <a href="/">Home</a>
             </li>
             <li>
-                HTML
+                <a href="/tags/html">HTML</a>
             </li>
             <li>
-                CSS
+                <a href="/tags/css">CSS</a>
             </li>
         </ul>
     </nav>
@@ -27,6 +27,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Attribute</th>
                     <th>values</th>
                 </tr>
@@ -36,6 +37,7 @@
                 <tr>
                     <td>{{ tag[0] }}</td>
                     <td>{{ tag[1] }}</td>
+                    <td>{{ tag[2] }}</td>
                 </tr>
                 {% else %}
                 <tr>

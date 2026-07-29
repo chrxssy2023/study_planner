@@ -1,100 +1,30 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    grid-template-rows: auto 1fr;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #000000;
-    color: #ffffff;
-}
-
-header {
-    grid-column: 1 / -1;
-    background-color: #2f2f2f;
-    padding: 18px 24px;
-}
-
-header h1 {
-    color: #ffffff;
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-nav {
-    background-color: #2f2f2f;
-    padding: 24px 20px;
-    min-height: 100%;
-}
-
-nav ul {
-    list-style: none;
-}
-
-nav li {
-    margin-bottom: 18px;
-}
-
-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.05rem;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-main {
-    background-color: #000000;
-    padding: 28px 32px;
-    overflow: auto;
-}
-
-main h2 {
-    color: #ffffff;
-    font-size: 1.75rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-main p {
-    color: #ffffff;
-    margin-bottom: 12px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ffffff;
-}
-
-thead th {
-    background-color: #cfcfcf;
-    color: #000000;
-    text-align: left;
-    padding: 10px 12px;
-    border: 1px solid #ffffff;
-    font-weight: 700;
-}
-
-tbody td {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 10px 12px;
-    border: 1px solid #ffffff;
-    vertical-align: top;
-}
-
-tbody tr:nth-child(even) td {
-    background-color: #0a0a0a;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML and CSS Tags</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Web Tags</h1>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/tags/html">HTML</a>
+            </li>
+            <li>
+                <a href="/tags/css">CSS</a>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Welcome to the Web Tags</h2>
+        <p>This is a collection of HTML and CSS tags.</p >
+    </main>
+</body>
+</html>
