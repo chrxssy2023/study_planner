@@ -20,40 +20,25 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/webpages")
-def render_webpages():
 
-    query = "SELECT assignment_name, due_date FROM assignments"
 
+
+
+
+
+@app.route('/tags/<tag_type>')
+def render_webpage(tag_type):
+    title = tag_type.upper()
+    query = "SELECT tag, description FROM html_tags WHERE type=?"
     con = create_connection(DATABASE)
+    print(con)
     cur = con.cursor()
 
-    cur.execute(query)
+    cur.execute(query, (title, ))
     tag_list = cur.fetchall()
-
     con.close()
-
     print(tag_list)
-
-    return render_template("webpages.html", tags=tag_list)
-
-
-@app.route("/styles")
-def render_styles():
-
-    query = "SELECT assignment_name, due_date FROM assignments"
-
-    con = create_connection(DATABASE)
-    cur = con.cursor()
-
-    cur.execute(query)
-    tag_list = cur.fetchall()
-
-    con.close()
-
-    print(tag_list)
-
-    return render_template("styles.html", tags=tag_list)
+    return render_template("webtags.html", tags=tag_list, title=title)
 
 
 if __name__ == "__main__":
