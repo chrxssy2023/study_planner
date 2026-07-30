@@ -11,29 +11,31 @@ body {
 
 body {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 220px 1fr;
     grid-template-rows: auto 1fr;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #fff5fa;
+    color: #333;
 }
+
+/* Header */
 
 header {
     grid-column: 1 / -1;
-    background-color: #2f2f2f;
-    padding: 18px 24px;
+    background: #ff7eb6;
+    padding: 20px 30px;
 }
 
 header h1 {
-    color: #ffffff;
+    color: white;
     font-size: 2rem;
-    font-weight: 700;
 }
 
+/* Navigation */
+
 nav {
-    background-color: #2f2f2f;
-    padding: 24px 20px;
-    min-height: 100%;
+    background: #ffd6e8;
+    padding: 25px 20px;
 }
 
 nav ul {
@@ -45,78 +47,95 @@ nav li {
 }
 
 nav a {
-    color: #ffffff;
+    color: #d63384;
     text-decoration: none;
-    font-size: 1.05rem;
+    font-weight: bold;
 }
 
 nav a:hover {
+    color: #ff4d94;
     text-decoration: underline;
 }
 
+/* Main */
+
 main {
-    background-color: #000000;
-    padding: 28px 32px;
-    overflow: auto;
+    padding: 30px;
+    background: #fff5fa;
 }
 
 main h2 {
-    color: #ffffff;
-    font-size: 1.75rem;
+    color: #d63384;
     margin-bottom: 20px;
-    font-weight: 700;
+    font-size: 2rem;
 }
 
 main p {
-    color: #ffffff;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+    line-height: 1.6;
 }
+
+/* Table */
 
 table {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #ffffff;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-thead th {
-    background-color: #cfcfcf;
-    color: #000000;
+th {
+    background: #ff7eb6;
+    color: white;
+    padding: 14px;
     text-align: left;
-    padding: 10px 12px;
-    border: 1px solid #ffffff;
-    font-weight: 700;
 }
 
-tbody td {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 10px 12px;
-    border: 1px solid #ffffff;
-    vertical-align: top;
+th a {
+    color: white;
+    text-decoration: none;
 }
 
-tbody tr:nth-child(even) td {
-    background-color: #0a0a0a;
+th a:hover {
+    text-decoration: underline;
 }
 
-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 20px;
-    column-gap: 20px;
+td {
+    padding: 14px;
+    border-bottom: 1px solid #ffd6e8;
 }
 
-main h2 {
-    grid-column: 1/5;
+tr:nth-child(even) {
+    background: #fff0f6;
 }
 
-article {
-    background-color: #555555;
-    padding: 5px;
+tr:hover {
+    background: #ffe4ef;
 }
+
+/* Search Form */
 
 form {
-    border: 1px solid #ffffff;
-    padding: 5px;
-    margin: 5px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 8px 10px;
+    border: 2px solid #ffb3d1;
+    border-radius: 6px;
+}
+
+input[type="submit"] {
+    padding: 8px 16px;
+    background: #ff7eb6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: #ff4d94;
 }
