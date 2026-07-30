@@ -59,8 +59,50 @@ def index():
 def render_webpage(tag_type):
     title = tag_type.upper()
     tag_list = get_tags(tag_type)
-    return render_template("webtags.html", tags=get_tags(tag_type),
-title=title, types=get_types())
+    return render_template(
+        "webtags.html",
+        tags=tag_list,
+        title=title,
+        types=get_types(),
+        order="asc"
+    )
+
+
+@app.route("/sort/<title>")
+def render_sortpage(title):
+    sort = request.args.get("sort")
+    order = request.args.get("order", "asc")
+
+    if order == "asc":
+        new_order = "desc"
+    else:
+        new_order = "asc"
+
+    if sort not in ["tag", "description"]:
+        sort = "tag"
+
+    query = f"""
+        SELECT tag, description
+        FROM html_tags
+        WHERE type=?
+        ORDER BY {sort} {order}
+    """
+
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+
+    cur.execute(query, (title.upper(),))
+    tag_list = cur.fetchall()
+
+    con.close()
+
+    return render_template(
+        "webtags.html",
+        tags=tag_list,
+        title=title.upper(),
+        types=get_types(),
+        order=new_order
+    )
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -85,8 +127,13 @@ def render_search():
 
     con.close()
 
-    return render_template("webtags.html", tags=tag_list, 
-                           title=title, types=get_types())
+    return render_template(
+        "webtags.html",
+        tags=tag_list,
+        title=title,
+        types=get_types(),
+        order="asc"
+    )
 
 
 if __name__ == "__main__":

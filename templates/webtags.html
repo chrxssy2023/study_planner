@@ -1,18 +1,28 @@
 {% extends "base.html" %}
 
 {% block main %}
-        <h2>{{ title }}</h2>
+<h2>{{ title }}</h2>
 
-            {% for tag in tags %}
-            <article>
-                <h3>{{ tag[0] }}</h3>
-                <p>{{ tag[1] }}</p>
-                <p>{{ tag[2] }}</p>
-            </article>
-            {% else %}
-            <tr>
-                <td colspan="2">No tags found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+<table>
+    <tr>
+        <th>
+            <a href="/sort/{{ title }}?sort=tag&order={{ order }}">Tag</a>
+        </th>
+        <th>
+            <a href="/sort/{{ title }}?sort=description&order={{ order }}">Description</a>
+        </th>
+    </tr>
+
+    {% for tag in tags %}
+    <tr>
+        <td>{{ tag[0] }}</td>
+        <td>{{ tag[1] }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="2">No tags found.</td>
+    </tr>
+    {% endfor %}
+</table>
+
 {% endblock %}
