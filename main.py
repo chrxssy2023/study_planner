@@ -107,7 +107,7 @@ def render_sortpage(title):
 
 @app.route("/search", methods=["GET", "POST"])
 def render_search():
-    search = request.form["search"]
+    search = request.form.get("search", "")
     title = "Search for " + search
 
     query = """

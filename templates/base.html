@@ -21,13 +21,16 @@
                 <a href="/tags/css">CSS</a>
             </li>
         </ul>
+
+        <!-- Search Form -->
         <form method="POST" action="/search">
-            <input type="text" name="search" id="search">
-            <input type="submit" value="Search"
+            <input type="text" name="search" id="search" placeholder="Search tags or desc...">
+            <input type="submit" value="Search">
         </form>
     </nav>
+
     <main>
-    {% block main %}{% endblock %}
+        {% block main %}{% endblock %}
     </main>
 </body>
 </html>
