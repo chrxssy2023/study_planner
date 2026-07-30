@@ -2,26 +2,17 @@
 
 {% block main %}
         <h2>{{ title }}</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Attribute</th>
-                    <th>values</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for tag in tags %}
-                <tr>
-                    <td>{{ tag[0] }}</td>
-                    <td>{{ tag[1] }}</td>
-                    <td>{{ tag[2] }}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="2">No tags found.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+            {% for tag in tags %}
+            <article>
+                <h3>{{ tag[0] }}</h3>
+                <p>{{ tag[1] }}</p>
+                <p>{{ tag[2] }}</p>
+            </article>
+            {% else %}
+            <tr>
+                <td colspan="2">No tags found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
 {% endblock %}
