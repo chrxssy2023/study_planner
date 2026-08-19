@@ -59,11 +59,14 @@ body {
 .main-nav {
     flex: 1 1 auto;
     min-width: 0;
+    display: flex;
+    align-items: center;
 }
 
 nav ul {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     list-style: none;
     gap: 6px 22px;
 }
@@ -83,11 +86,7 @@ nav a {
     width: 18px;
     height: 18px;
     flex-shrink: 0;
-    fill: none;
-    stroke: #fff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    display: block;
 }
 
 nav a:hover {
@@ -96,7 +95,7 @@ nav a:hover {
 }
 
 nav a:hover .nav-icon {
-    stroke: #fff5fa;
+    opacity: 0.85;
 }
 
 /* ===== Search ===== */
@@ -104,6 +103,10 @@ nav a:hover .nav-icon {
 .search-form {
     flex: 0 1 clamp(140px, 22vw, 280px);
     min-width: 120px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    align-self: center;
 }
 
 .search-box {
@@ -139,12 +142,91 @@ nav a:hover .nav-icon {
     background-position: center;
 }
 
+/* ===== Body layout: 1/5 sidebar + 4/5 main ===== */
+
+.body-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ===== Sidebar ===== */
+
+.sidebar {
+    padding: 20px 16px;
+    background: #ffd6e8;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-box {
+    border: 2px solid #ffb3d1;
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255, 126, 182, 0.15);
+}
+
+.sidebar-box h2 {
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d63384;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ffd6e8;
+}
+
+.quick-links,
+.reminders {
+    list-style: none;
+}
+
+.quick-links li,
+.reminders li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ffd6e8;
+    font-size: 0.9rem;
+}
+
+.quick-links li:last-child,
+.reminders li:last-child {
+    border-bottom: none;
+}
+
+.quick-links li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #d63384;
+    font-weight: bold;
+}
+
+.quick-links li::after {
+    content: "›";
+    font-size: 1.1rem;
+    color: #ff7eb6;
+}
+
+.view-all {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #d63384;
+}
+
 /* Main */
 
 main {
-    flex: 1;
     padding: 30px;
     background: #fff5fa;
+    overflow-y: auto;
 }
 
 main h2 {
@@ -200,7 +282,7 @@ tr:hover {
 
 /* Search Form */
 
-form {
+form:not(.search-form) {
     margin-bottom: 20px;
 }
 
