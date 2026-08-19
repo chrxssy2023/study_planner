@@ -2,35 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HTML and CSS Tags</title>
+    <title>Study Planner</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Web Tags</h1>
+    <header class="top-header">
+        <h1 class="site-title">Study Planner</h1>
+        <div class="header-row">
+            <div class="nav-bar">
+                <nav class="main-nav">
+                    <ul>
+                    <li>
+                        <a href="/">
+                            <img src="/static/images/home.svg" alt="Home" class="nav-icon">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/assignments">
+                            <img src="/static/images/assignments.svg" alt="Asignments" class="nav-icon">
+                            Assignments
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/subjects">
+                            <img src="/static/images/subjects.svg" alt="Subjects" class="nav-icon">
+                            Subjects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/calendar">
+                            <img src="/static/images/calendar.svg" alt="Calendar" class="nav-icon">
+                            Calendar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/static/images/notes.svg" alt="Notes" class="nav-icon">
+                            Notes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/static/images/settings.svg" alt="Settings class="nav-icon">
+                            Settings
+                        </a>
+                    </li>
+                    </ul>
+                </nav>
+                <form class="search-form" method="POST" action="/search">
+                    <div class="search-box">
+                        <input type="text" name="search" id="search" placeholder="Search...">
+                        <span class="search-icon" aria-hidden="true"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
     </header>
-    <nav>
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/tags/html">HTML</a>
-            </li>
-            <li>
-                <a href="/tags/css">CSS</a>
-            </li>
-        </ul>
 
-        <!-- Search Form -->
-        <form method="POST" action="/search">
-            <input type="text" name="search" id="search" placeholder="Search tags or desc...">
-            <input type="submit" value="Search">
-        </form>
-    </nav>
+    <div class="body-container">
+        <aside class="sidebar">
+            <section class="sidebar-box">
+                <h2>Quick Links</h2>
+                <ul class="quick-links">
+                    <li>Add assignments</li>
+                    <li>Add subjects</li>
+                    <li>View assignments</li>
+                    <li>View Subjects</li>
+                    <li>View Calendar</li>
+                </ul>
+            </section>
+            <section class="sidebar-box">
+                <h2>Reminders</h2>
+                <ul class="reminders">
+                    <li>English Essay - Today</li>
+                    <li>Physics Quiz - Tomorrow</li>
+                    <li>Biology Homework - Fri. 21 August</li>
+                    <li>Music exam - Tue. 25 August</li>
+                </ul>
+                <span class="view-all">View All</span>
+            </section>
+        </aside>
 
-    <main>
-        {% block main %}{% endblock %}
-    </main>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+    </div>
 </body>
 </html>
