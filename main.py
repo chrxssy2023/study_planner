@@ -49,6 +49,28 @@ def get_types():
     con.close()
     return records
 
+def get_subjects():
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+    cur.execute("SELECT id, subject_name, teacher_name FROM subjects ORDER BY subject_name")
+    rows = cur.fetchall()
+    con.close()
+    return rows
+
+
+def get_assignments():
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+    cur.execute("""
+        SELECT assignment_name, subject_name, due_date, priority, status
+        FROM assignments a
+        JOIN subjects s ON a.subject_id = s.id
+        ORDER BY a.due_date
+    """)
+    rows = cur.fetchall()
+    con.close()
+    return rows
+
 
 @app.route("/")
 def index():
@@ -134,6 +156,18 @@ def render_search():
         types=get_types(),
         order="asc"
     )
+
+
+@app.route("/assignments")
+def assignments():
+    assignment_list = get_assignments()
+    return render_template("assignments.html", assignments=assignment_list)
+
+
+@app.route("/subjects")
+def subjects():
+    subject_list = get_subjects()
+    return render_template("subjects.html", subjects=subject_list)
 
 
 if __name__ == "__main__":

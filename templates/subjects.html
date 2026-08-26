@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2 class="page-title">All Subject(s)</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>Teacher</th>
+        <th>Action</th>
+    </tr>
+    {% for row in subjects %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>Edit / Del</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="4">No subjects found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

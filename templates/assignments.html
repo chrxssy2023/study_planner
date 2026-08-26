@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2 class="page-title">All Assignments</h2>
+
+<table>
+    <tr>
+        <th>Assignments</th>
+        <th>Subjects</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for row in assignments %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+        <td>Edit / Del</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="6">No assignments found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
