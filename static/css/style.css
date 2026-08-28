@@ -310,3 +310,64 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background: #ff4d94;
 }
+
+.calendar {
+    width: 100%;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calendar-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.calendar-header button {
+    padding: 7px 12px;
+    background: white;
+    border: 1px solid #ffb3d1;
+    border-radius: 5px;
+    color: #d63384;
+    cursor: pointer;
+}
+
+.calendar-header button:hover {
+    background: #ffe4ef;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: white;
+    border: 1px solid #ffb3d1;
+}
+
+.day-name {
+    background: #ff7eb6;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.day {
+    height: 100px;
+    padding: 8px;
+    border-top: 1px solid #ffd6e8;
+    border-right: 1px solid #ffd6e8;
+    background: white;
+}
+
+.day:hover {
+    background: #fff0f6;
+}
+
+.other-month {
+    color: #aaa;
+    background: #fafafa;
+}

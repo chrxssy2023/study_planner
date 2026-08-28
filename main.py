@@ -52,7 +52,8 @@ def get_types():
 def get_subjects():
     con = create_connection(DATABASE)
     cur = con.cursor()
-    cur.execute("SELECT id, subject_name, teacher_name FROM subjects ORDER BY subject_name")
+    cur.execute("SELECT id, subject_name, teacher_name " \
+    "FROM subjects ORDER BY subject_name")
     rows = cur.fetchall()
     con.close()
     return rows
@@ -168,6 +169,16 @@ def assignments():
 def subjects():
     subject_list = get_subjects()
     return render_template("subjects.html", subjects=subject_list)
+
+
+@app.route("/calendar")
+def calendar():
+    return render_template("calendar.html")
+
+
+@app.route("/notes")
+def notes():
+    return render_template("notes.html")
 
 
 if __name__ == "__main__":
