@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 
 {% block main %}
-<h2 class="page-title">All Subject(s)</h2>
+<h2 class="page-title">All Subjects</h2>
 
 <table>
     <tr>
-        <th>Subject</th>
-        <th>Teacher</th>
+        <th>
+            <a href="/subjects?sort=subject_name">
+                Subject
+            </a>
+        </th>
+        <th>
+            <a href="/subjects?sort=teacher_name">
+                Teacher
+            </a>
+        </th>
     </tr>
     {% for row in subjects %}
     <tr>

@@ -49,11 +49,25 @@ def get_types():
     con.close()
     return records
 
-def get_subjects():
+def get_subjects(sort="subject_name"):
+    allowed_sorts = [
+        "id",
+        "subject_name",
+        "teacher_name"
+    ]
+
+    if sort not in allowed_sorts:
+        sort = "subject_name"
+
+    query = f"""
+        SELECT id, subject_name, teacher_name
+        FROM subjects
+        ORDER BY {sort} ASC
+    """
+
     con = create_connection(DATABASE)
     cur = con.cursor()
-    cur.execute("SELECT id, subject_name, teacher_name " \
-    "FROM subjects ORDER BY subject_name")
+    cur.execute(query)
     rows = cur.fetchall()
     con.close()
     return rows
@@ -167,8 +181,14 @@ def assignments():
 
 @app.route("/subjects")
 def subjects():
-    subject_list = get_subjects()
-    return render_template("subjects.html", subjects=subject_list)
+    sort = request.args.get("sort", "subject_name")
+
+    subject_list = get_subjects(sort)
+
+    return render_template(
+        "subjects.html",
+        subjects=subject_list
+    )
 
 
 @app.route("/calendar")
