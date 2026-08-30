@@ -15,11 +15,23 @@
                 Teacher
             </a>
         </th>
+        <th>
+            <a href="/subjects?sort=room">
+                Room
+            </a>
+        </th>
+        <th>
+            <a href="/subjects?sort=credits">
+                Credits
+            </a>
+        </th>
     </tr>
     {% for row in subjects %}
     <tr>
         <td>{{ row[1] }}</td>
         <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
     </tr>
     {% else %}
     <tr>

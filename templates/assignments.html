@@ -5,11 +5,31 @@
 
 <table>
     <tr>
-        <th>Assignments</th>
-        <th>Subjects</th>
-        <th>Due Date</th>
-        <th>Priority</th>
-        <th>Status</th>
+        <th>
+            <a href="/assignments?sort=assignment_name">
+                Assignments
+            </a>
+        </th>
+        <th>
+            <a href="/assignments?sort=subject_name">
+                Subjects
+            </a>
+        </th>
+        <th>
+            <a href="/assignments?sort=due_date">
+                Due Date
+            </a>
+        </th>
+        <th>
+            <a href="/assignments?sort=priority">
+                Priority
+            </a>
+        </th>
+        <th>
+            <a href="/assignments?sort=status">
+                Status
+            </a>
+        </th>
     </tr>
     {% for row in assignments %}
     <tr>
@@ -21,7 +41,7 @@
     </tr>
     {% else %}
     <tr>
-        <td colspan="6">No assignments found.</td>
+        <td colspan="5">No assignments found.</td>
     </tr>
     {% endfor %}
 </table>

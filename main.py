@@ -53,16 +53,23 @@ def get_subjects(sort="subject_name"):
     allowed_sorts = [
         "id",
         "subject_name",
-        "teacher_name"
+        "teacher_name",
+        "room",
+        "credits"
     ]
 
     if sort not in allowed_sorts:
         sort = "subject_name"
 
+    if sort == "credits":
+        order = "DESC"
+    else:
+        order = "ASC"
+
     query = f"""
-        SELECT id, subject_name, teacher_name
+        SELECT id, subject_name, teacher_name, room, credits
         FROM subjects
-        ORDER BY {sort} ASC
+        ORDER BY {sort} {order}
     """
 
     con = create_connection(DATABASE)
@@ -73,15 +80,51 @@ def get_subjects(sort="subject_name"):
     return rows
 
 
-def get_assignments():
-    con = create_connection(DATABASE)
-    cur = con.cursor()
-    cur.execute("""
+def get_assignments(sort="assignment_name"):
+    allowed_sorts = [
+        "assignment_name",
+        "subject_name",
+        "due_date",
+        "priority",
+        "status"
+    ]
+
+    if sort not in allowed_sorts:
+        sort = "assignment_name"
+
+    if sort == "priority":
+        order_by = """
+            CASE priority
+                WHEN 'High' THEN 1
+                WHEN 'Medium' THEN 2
+                WHEN 'Low' THEN 3
+                ELSE 4
+            END
+        """
+
+    elif sort == "status":
+        order_by = """
+            CASE status
+                WHEN 'Not Started' THEN 1
+                WHEN 'In Progress' THEN 2
+                WHEN 'Complete' THEN 3
+                ELSE 4
+            END
+        """
+
+    else:
+        order_by = sort
+
+    query = f"""
         SELECT assignment_name, subject_name, due_date, priority, status
         FROM assignments a
         JOIN subjects s ON a.subject_id = s.id
-        ORDER BY a.due_date
-    """)
+        ORDER BY {order_by}
+    """
+
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+    cur.execute(query)
     rows = cur.fetchall()
     con.close()
     return rows
@@ -175,8 +218,14 @@ def render_search():
 
 @app.route("/assignments")
 def assignments():
-    assignment_list = get_assignments()
-    return render_template("assignments.html", assignments=assignment_list)
+    sort = request.args.get("sort", "assignment_name")
+
+    assignment_list = get_assignments(sort)
+
+    return render_template(
+        "assignments.html",
+        assignments=assignment_list
+    )
 
 
 @app.route("/subjects")
