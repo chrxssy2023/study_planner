@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import sqlite3
 from sqlite3 import Error
+import calendar as cal
+from datetime import datetime
 
 app = Flask(__name__)
 DATABASE = "study_planner.db"
@@ -242,7 +244,41 @@ def subjects():
 
 @app.route("/calendar")
 def calendar():
-    return render_template("calendar.html")
+
+    month = request.args.get("month", type=int)
+    year = request.args.get("year", type=int)
+
+    if month is None or year is None:
+        today = datetime.today()
+        month = today.month
+        year = today.year
+
+    change = request.args.get("change")
+
+    if change == "next":
+        month = month + 1
+
+        if month == 13:
+            month = 1
+            year = year + 1
+
+    elif change == "previous":
+        month = month - 1
+
+        if month == 0:
+            month = 12
+            year = year - 1
+
+    month_days = cal.monthcalendar(year, month)
+    month_name = cal.month_name[month]
+
+    return render_template(
+        "calendar.html",
+        month=month,
+        year=year,
+        month_name=month_name,
+        month_days=month_days
+    ) 
 
 
 @app.route("/notes")

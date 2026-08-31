@@ -340,6 +340,24 @@ input[type="submit"]:hover {
     background: #ffe4ef;
 }
 
+.calendar-header a {
+    text-decoration: none;
+}
+
+.calendar-button {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #ff7eb6;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 3px;
+}
+
+.calendar-button:hover {
+    background-color: #ff5fa3;
+}
+
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

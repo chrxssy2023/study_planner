@@ -5,64 +5,58 @@
 <div class="calendar">
 
     <div class="calendar-header">
-        <h2>August 2026</h2>
+
+        <h2>{{ month_name }} {{ year }}</h2>
 
         <div>
-            <button>&lt;</button>
-            <button>&gt;</button>
-            <button>Today</button>
+
+            <a class="calendar-button" href="/calendar?month={{ month }}&year={{ year }}&change=previous">
+                &lt;
+            </a>
+
+            <a class="calendar-button" href="/calendar">
+                Today
+            </a>
+
+            <a class="calendar-button" href="/calendar?month={{ month }}&year={{ year }}&change=next">
+                &gt;
+            </a>
+
         </div>
+
     </div>
+
 
     <div class="calendar-grid">
 
+        <div class="day-name">Mon</div>
         <div class="day-name">Tue</div>
         <div class="day-name">Wed</div>
         <div class="day-name">Thu</div>
         <div class="day-name">Fri</div>
         <div class="day-name">Sat</div>
         <div class="day-name">Sun</div>
-        <div class="day-name">Mon</div>
 
-        <div class="day other-month">28</div>
-        <div class="day other-month">29</div>
-        <div class="day other-month">30</div>
-        <div class="day other-month">31</div>
-        <div class="day">1</div>
-        <div class="day">2</div>
-        <div class="day">3</div>
-        <div class="day">4</div>
 
-        <div class="day">5</div>
-        <div class="day">6</div>
-        <div class="day">7</div>
-        <div class="day">8</div>
-        <div class="day">9</div>
-        <div class="day">10</div>
-        <div class="day">11</div>
+        {% for week in month_days %}
 
-        <div class="day">12</div>
-        <div class="day">13</div>
-        <div class="day">14</div>
-        <div class="day">15</div>
-        <div class="day">16</div>
-        <div class="day">17</div>
-        <div class="day">18</div>
+            {% for day in week %}
 
-        <div class="day">19</div>
-        <div class="day">20</div>
-        <div class="day">21</div>
-        <div class="day">22</div>
-        <div class="day">23</div>
-        <div class="day">24</div>
-        <div class="day">25</div>
+                {% if day == 0 %}
 
-        <div class="day">26</div>
-        <div class="day">27</div>
-        <div class="day">28</div>
-        <div class="day">29</div>
-        <div class="day">30</div>
-        <div class="day">31</div>
+                    <div class="day other-month"></div>
+
+                {% else %}
+
+                    <div class="day">
+                        {{ day }}
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        {% endfor %}
 
     </div>
 
