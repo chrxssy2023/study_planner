@@ -340,6 +340,7 @@ input[type="submit"]:hover {
     background: #ffe4ef;
 }
 
+/* Removes the horizontal line in between the buttons */
 .calendar-header a {
     text-decoration: none;
 }
