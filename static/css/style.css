@@ -4,6 +4,76 @@
     padding: 0;
 }
 
+:root {
+    --background: #fff5fa;
+    --header: #ff7eb6;
+    --nav: #ff9ec7;
+    --sidebar: #ffd6e8;
+    --primary: #d63384;
+    --border: #ffb3d1;
+    --light: #fff0f6;
+    --hover: #ffe4ef;
+    --white: #ffffff;
+    --text: #333333;
+    --muted: #888888;
+}
+
+.theme-pink {
+    --background: #fff5fa;
+    --header: #ff7eb6;
+    --nav: #ff9ec7;
+    --sidebar: #ffd6e8;
+    --primary: #d63384;
+    --border: #ffb3d1;
+    --light: #fff0f6;
+    --hover: #ffe4ef;
+    --white: #ffffff;
+    --text: #333333;
+    --muted: #888888;
+}
+
+.theme-light {
+    --background: #f2f2f7;
+    --header: #cfcfcf;
+    --nav: #b6b6b6;
+    --sidebar: #c8cacc;
+    --primary: #8b8989;
+    --border: #e5e5e5;
+    --light: #f4f5f6;
+    --hover: #eaeaea;
+    --white: #ffffff;
+    --text: #1c1c1e;
+    --muted: #8e8e93;
+}
+
+.theme-dark {
+    --background: #707070;
+    --header: #4b4a4a;
+    --nav: #726f6f;
+    --sidebar: #3e3d3d;
+    --primary: #ffffff;
+    --border: #6e6d6d;
+    --light: #9f9d9d;
+    --hover: #3a3a3a;
+    --white: #b7b5b5;
+    --text: #f5f5f5;
+    --muted: #bbbbbb;
+}
+
+.theme-colourblind {
+    --background: #ffffff;
+    --header: #0072b2;
+    --nav: #e69f00;
+    --sidebar: #004B76;
+    --primary: #0C7BDC;
+    --border: #CCCCCC;
+    --light: #F0F8FF;
+    --hover: #E69F00;
+    --white: #ffffff;
+    --text: #000000;
+    --muted: #6E6E6E;
+}
+
 html,
 body {
     height: 100%;
@@ -14,12 +84,12 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #fff5fa;
-    color: #333;
+    background-color: var(--background);
+    color: var(--text);
 }
 
 .top-header {
-    background: #ff7eb6;
+    background: var(--header);
     padding: 20px 30px 0;
 }
 
@@ -28,7 +98,7 @@ body {
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: white;
+    color: var(--white);
     margin-bottom: 0;
     padding-bottom: 16px;
 }
@@ -36,7 +106,7 @@ body {
 .header-row {
     margin: 0 -30px;
     padding: 0 30px 14px;
-    background: #ff7eb6;
+    background: var(--header);
 }
 
 .nav-bar {
@@ -46,10 +116,10 @@ body {
     flex-wrap: wrap;
     gap: 12px 20px;
     width: 100%;
-    background: #ff9ec7;
+    background: var(--nav);
     border-radius: 10px;
     padding: 10px 18px;
-    box-shadow: 0 2px 6px rgba(214, 51, 132, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .main-nav {
@@ -71,7 +141,7 @@ nav a {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: #fff;
+    color: var(--white);
     text-decoration: none;
     font-weight: bold;
     font-size: 0.95rem;
@@ -86,12 +156,54 @@ nav a {
 }
 
 nav a:hover {
-    color: #fff5fa;
+    color: var(--background);
     text-decoration: underline;
 }
 
 nav a:hover .nav-icon {
     opacity: 0.85;
+}
+
+.theme-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.theme-icon {
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.theme-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    width: 150px;
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.theme-menu:hover .theme-options {
+    display: block;
+}
+
+.theme-options a {
+    display: block;
+    padding: 10px;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.theme-options a:hover {
+    background: var(--hover);
+    color: var(--primary);
 }
 
 .search-form {
@@ -113,15 +225,16 @@ nav a:hover .nav-icon {
 .search-box input[type="text"] {
     width: 100%;
     padding: 8px 36px 8px 12px;
-    border: 2px solid #ffb3d1;
+    border: 2px solid var(--border);
     border-radius: 6px;
     font-size: 0.9rem;
-    background: #fff;
+    background: var(--white);
+    color: var(--text);
 }
 
 .search-box input[type="text"]:focus {
     outline: none;
-    border-color: #ff7eb6;
+    border-color: var(--primary);
 }
 
 .search-icon {
@@ -145,18 +258,18 @@ nav a:hover .nav-icon {
 
 .sidebar {
     padding: 20px 16px;
-    background: #ffd6e8;
+    background: var(--sidebar);
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .sidebar-box {
-    border: 2px solid #ffb3d1;
+    border: 2px solid var(--border);
     border-radius: 12px;
     padding: 14px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(255, 126, 182, 0.15);
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
 }
 
 .sidebar-box h2 {
@@ -164,10 +277,10 @@ nav a:hover .nav-icon {
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #d63384;
+    color: var(--primary);
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 1px solid #ffd6e8;
+    border-bottom: 1px solid var(--border);
 }
 
 .quick-links,
@@ -178,7 +291,7 @@ nav a:hover .nav-icon {
 .quick-links li,
 .reminders li {
     padding: 8px 0;
-    border-bottom: 1px solid #ffd6e8;
+    border-bottom: 1px solid var(--border);
     font-size: 0.9rem;
 }
 
@@ -191,12 +304,12 @@ nav a:hover .nav-icon {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #d63384;
+    color: var(--primary);
     font-weight: bold;
 }
 
 .quick-links a {
-    color: #d63384;
+    color: var(--primary);
     text-decoration: none;
     display: flex;
     justify-content: space-between;
@@ -209,11 +322,11 @@ nav a:hover .nav-icon {
 .quick-links a::after {
     content: "›";
     font-size: 1.1rem;
-    color: #ff7eb6;
+    color: var(--primary);
 }
 
 .quick-links a:hover {
-    color: #ff4d94;
+    color: var(--primary);
 }
 
 .view-all {
@@ -223,18 +336,17 @@ nav a:hover .nav-icon {
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #d63384;
+    color: var(--primary);
 }
-
 
 main {
     padding: 30px;
-    background: #fff5fa;
+    background: var(--background);
     overflow-y: auto;
 }
 
 main h2 {
-    color: #d63384;
+    color: var(--primary);
     margin-bottom: 20px;
     font-size: 2rem;
 }
@@ -253,21 +365,21 @@ main p {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: var(--white);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 th {
-    background: #ff7eb6;
-    color: white;
+    background: var(--header);
+    color: var(--white);
     padding: 14px;
     text-align: left;
 }
 
 th a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
 }
 
@@ -277,15 +389,15 @@ th a:hover {
 
 td {
     padding: 14px;
-    border-bottom: 1px solid #ffd6e8;
+    border-bottom: 1px solid var(--border);
 }
 
 tr:nth-child(even) {
-    background: #fff0f6;
+    background: var(--light);
 }
 
 tr:hover {
-    background: #ffe4ef;
+    background: var(--hover);
 }
 
 form:not(.search-form) {
@@ -294,21 +406,23 @@ form:not(.search-form) {
 
 input[type="text"] {
     padding: 8px 10px;
-    border: 2px solid #ffb3d1;
+    border: 2px solid var(--border);
     border-radius: 6px;
+    background: var(--white);
+    color: var(--text);
 }
 
 input[type="submit"] {
     padding: 8px 16px;
-    background: #ff7eb6;
-    color: white;
+    background: var(--header);
+    color: var(--white);
     border: none;
     border-radius: 6px;
     cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background: #ff4d94;
+    background: var(--primary);
 }
 
 .calendar {
@@ -329,18 +443,17 @@ input[type="submit"]:hover {
 
 .calendar-header button {
     padding: 7px 12px;
-    background: white;
-    border: 1px solid #ffb3d1;
+    background: var(--white);
+    border: 1px solid var(--border);
     border-radius: 5px;
-    color: #d63384;
+    color: var(--primary);
     cursor: pointer;
 }
 
 .calendar-header button:hover {
-    background: #ffe4ef;
+    background: var(--hover);
 }
 
-/* Removes the horizontal line in between the buttons */
 .calendar-header a {
     text-decoration: none;
 }
@@ -348,27 +461,27 @@ input[type="submit"]:hover {
 .calendar-button {
     display: inline-block;
     padding: 8px 14px;
-    background-color: #ff7eb6;
-    color: white;
+    background-color: var(--header);
+    color: var(--white);
     text-decoration: none;
     border-radius: 5px;
     margin: 0 3px;
 }
 
 .calendar-button:hover {
-    background-color: #ff5fa3;
+    background-color: var(--primary);
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background: white;
-    border: 1px solid #ffb3d1;
+    background: var(--white);
+    border: 1px solid var(--border);
 }
 
 .day-name {
-    background: #ff7eb6;
-    color: white;
+    background: var(--header);
+    color: var(--white);
     padding: 10px;
     text-align: center;
     font-weight: bold;
@@ -377,18 +490,18 @@ input[type="submit"]:hover {
 .day {
     height: 100px;
     padding: 8px;
-    border-top: 1px solid #ffd6e8;
-    border-right: 1px solid #ffd6e8;
-    background: white;
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    background: var(--white);
 }
 
 .day:hover {
-    background: #fff0f6;
+    background: var(--light);
 }
 
 .other-month {
-    color: #aaa;
-    background: #fafafa;
+    color: var(--muted);
+    background: var(--light);
 }
 
 .notes {
@@ -398,8 +511,8 @@ input[type="submit"]:hover {
 }
 
 .notes-list {
-    background: white;
-    border: 2px solid #ffb3d1;
+    background: var(--white);
+    border: 2px solid var(--border);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -407,15 +520,15 @@ input[type="submit"]:hover {
 .notes-list h3 {
     margin: 0;
     padding: 15px;
-    color: #d63384;
+    color: var(--primary);
     text-transform: uppercase;
     font-size: 1rem;
-    border-bottom: 1px solid #ffd6e8;
+    border-bottom: 1px solid var(--border);
 }
 
 .note {
     padding: 13px;
-    border-bottom: 1px solid #ffd6e8;
+    border-bottom: 1px solid var(--border);
     cursor: pointer;
 }
 
@@ -426,16 +539,16 @@ input[type="submit"]:hover {
 }
 
 .note small {
-    color: #888;
+    color: var(--muted);
 }
 
 .note:hover {
-    background: #fff0f6;
+    background: var(--light);
 }
 
 .note.selected {
-    background: #ffe4ef;
-    border-left: 4px solid #ff7eb6;
+    background: var(--hover);
+    border-left: 4px solid var(--header);
 }
 
 .note-content {
@@ -449,31 +562,31 @@ input[type="submit"]:hover {
 
 .note-top button {
     padding: 8px 14px;
-    background: white;
-    border: 2px solid #ffb3d1;
+    background: var(--white);
+    border: 2px solid var(--border);
     border-radius: 6px;
-    color: #d63384;
+    color: var(--primary);
     font-weight: bold;
     cursor: pointer;
 }
 
 .note-top button:hover {
-    background: #ffe4ef;
+    background: var(--hover);
 }
 
 .note-paper {
     min-height: 550px;
     padding: 30px;
-    background: white;
-    border: 2px solid #ffb3d1;
+    background: var(--white);
+    border: 2px solid var(--border);
     border-radius: 10px;
 }
 
 .note-paper h2 {
-    color: #444;
+    color: var(--text);
     font-size: 1.4rem;
     font-weight: normal;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border);
     padding-bottom: 10px;
 }
 
@@ -483,5 +596,5 @@ input[type="submit"]:hover {
 
 .note-paper li {
     height: 38px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border);
 }

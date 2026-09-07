@@ -1,6 +1,6 @@
 """Study Planner."""
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import sqlite3
 from sqlite3 import Error
 import calendar as cal
@@ -11,6 +11,9 @@ app = Flask(__name__)
 
 # Store the name of the database file.
 DATABASE = "study_planner.db"
+
+# Store the different website themes.
+THEMES = ["pink", "light", "dark", "colourblind"]
 
 
 def create_connection(db_file):
@@ -40,7 +43,7 @@ def get_subjects(sort="subject_name"):
     if sort not in allowed_sorts:
         sort = "subject_name"
 
-    # Sort credits from highest to lowest
+    # Sort credits from highest to lowest.
     if sort == "credits":
         order = "DESC"
     else:
@@ -61,7 +64,7 @@ def get_subjects(sort="subject_name"):
     cur.execute(query)
     rows = cur.fetchall()
 
-    # Closes the database connection.
+    # Close the database connection.
     con.close()
 
     return rows
@@ -132,7 +135,7 @@ def get_assignments(sort="assignment_name"):
 
 @app.route("/")
 def index():
-    """Display the home page"""
+    """Display the home page."""
     # Load the home page template.
     return render_template("index.html")
 
@@ -140,11 +143,11 @@ def index():
 @app.route("/sort/<title>")
 def render_sortpage(title):
     """Display search results sorted by assignment or subject."""
-    # Get the selected sort and order
+    # Get the selected sort and order.
     sort = request.args.get("sort")
     order = request.args.get("order", "asc")
 
-    # Change the order
+    # Change the order.
     if order == "asc":
         new_order = "desc"
     else:
@@ -237,7 +240,7 @@ def assignments():
     # Get the selected sorting option.
     sort = request.args.get("sort", "assignment_name")
 
-    # Get the assignments usign the selected sorting option.
+    # Get the assignments using the selected sorting option.
     assignment_list = get_assignments(sort)
 
     # Send the assignments to the assignments page.
@@ -250,7 +253,7 @@ def assignments():
 @app.route("/subjects")
 def subjects():
     """Display all subjects from the database."""
-    # Get the selected sorting option
+    # Get the selected sorting option.
     sort = request.args.get("sort", "subject_name")
 
     # Get the subjects using the selected sorting option.
@@ -317,6 +320,20 @@ def calendar():
 def notes():
     """Display the notes page."""
     return render_template("notes.html")
+
+
+@app.route("/theme/<theme>")
+def change_theme(theme):
+    """Change the colour theme of the website."""
+    # Only allow the four available themes.
+    if theme not in THEMES:
+        theme = "pink"
+
+    # Save the selected theme in a cookie.
+    response = redirect(request.referrer or "/")
+    response.set_cookie("theme", theme)
+
+    return response
 
 
 if __name__ == "__main__":

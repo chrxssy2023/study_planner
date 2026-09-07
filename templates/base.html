@@ -4,82 +4,167 @@
     <meta charset="UTF-8">
     <title>Study Planner</title>
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
-
 </head>
-<body>
+
+<body class="theme-{{ request.cookies.get('theme', 'pink') }}">
+
     <header class="top-header">
+
         <h1 class="site-title">Study Planner</h1>
+
         <div class="header-row">
+
             <div class="nav-bar">
+
                 <nav class="main-nav">
                     <ul>
-                    <li>
-                        <a href="/">
-                            <img src="/static/images/home.svg" alt="Home" class="nav-icon">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/assignments">
-                            <img src="/static/images/assignments.svg" alt="Asignments" class="nav-icon">
-                            Assignments
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/subjects">
-                            <img src="/static/images/subjects.svg" alt="Subjects" class="nav-icon">
-                            Subjects
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/calendar">
-                            <img src="/static/images/calendar.svg" alt="Calendar" class="nav-icon">
-                            Calendar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/notes">
-                            <img src="/static/images/notes.svg" alt="Notes" class="nav-icon">
-                            Notes
-                        </a>
-                    </li>
+
+                        <li>
+                            <a href="/">
+                                <img src="/static/images/home.svg"
+                                     alt="Home"
+                                     class="nav-icon">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/assignments">
+                                <img src="/static/images/assignments.svg"
+                                     alt="Assignments"
+                                     class="nav-icon">
+                                Assignments
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/subjects">
+                                <img src="/static/images/subjects.svg"
+                                     alt="Subjects"
+                                     class="nav-icon">
+                                Subjects
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/calendar">
+                                <img src="/static/images/calendar.svg"
+                                     alt="Calendar"
+                                     class="nav-icon">
+                                Calendar
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/notes">
+                                <img src="/static/images/notes.svg"
+                                     alt="Notes"
+                                     class="nav-icon">
+                                Notes
+                            </a>
+                        </li>
+
                     </ul>
                 </nav>
-                <form class="search-form" method="POST" action="/search">
-                    <div class="search-box">
-                        <input type="text" name="search" id="search" placeholder="Search...">
-                        <span class="search-icon" aria-hidden="true"></span>
+
+
+                <!-- Theme button comes BEFORE the search bar -->
+
+                <div class="theme-menu">
+
+                    <span class="theme-icon">🎨</span>
+
+                    <div class="theme-options">
+
+                        <a href="/theme/pink">Pink</a>
+
+                        <a href="/theme/light">Light</a>
+
+                        <a href="/theme/dark">Dark</a>
+
+                        <a href="/theme/colourblind">High Contrast</a>
+
                     </div>
+
+                </div>
+
+
+                <!-- Search bar -->
+
+                <form class="search-form" method="POST" action="/search">
+
+                    <div class="search-box">
+
+                        <input type="text"
+                               name="search"
+                               id="search"
+                               placeholder="Search...">
+
+                        <span class="search-icon"
+                              aria-hidden="true"></span>
+
+                    </div>
+
                 </form>
+
             </div>
         </div>
+
     </header>
 
+
     <div class="body-container">
+
         <aside class="sidebar">
+
             <section class="sidebar-box">
+
                 <h2>Quick Links</h2>
+
                 <ul class="quick-links">
-                    <li><a href="/assignments">View Assignments</a></li>
-                    <li><a href="/subjects">View Subjects</a></li>
-                    <li><a href="/calendar">View Calendar</a></li>
+
+                    <li>
+                        <a href="/assignments">View Assignments</a>
+                    </li>
+
+                    <li>
+                        <a href="/subjects">View Subjects</a>
+                    </li>
+
+                    <li>
+                        <a href="/calendar">View Calendar</a>
+                    </li>
+
                 </ul>
+
             </section>
+
+
             <section class="sidebar-box">
+
                 <h2>Reminders</h2>
+
                 <ul class="reminders">
+
                     <li>English Essay - Today</li>
                     <li>Physics Quiz - Tomorrow</li>
                     <li>Biology Homework - Fri. 21 August</li>
                     <li>Music exam - Tue. 25 August</li>
+
                 </ul>
+
                 <span class="view-all">View All</span>
+
             </section>
+
         </aside>
+
 
         <main>
             {% block main %}{% endblock %}
         </main>
+
     </div>
+
 </body>
 </html>
