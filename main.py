@@ -133,10 +133,42 @@ def get_assignments(sort="assignment_name"):
     return rows
 
 
+def get_reminders():
+    """Get upcoming assignments to display as reminders in the sidebar."""
+    query = """
+        SELECT assignments.assignment_name,
+               subjects.subject_name,
+               assignments.due_date,
+               assignments.priority,
+               assignments.status
+        FROM assignments
+        JOIN subjects
+        ON assignments.subject_id = subjects.id
+        WHERE assignments.status != 'Complete'
+        ORDER BY assignments.due_date ASC
+        LIMIT 5
+    """
+    # Connect to the database.
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+
+    # Run the query and get all matching assignments.
+    cur.execute(query)
+    rows = cur.fetchall()
+
+    # Close the database connection.
+    con.close()
+
+    return rows
+
+@app.context_processor
+def inject_reminders():
+    """Make reminders available on every page."""
+    return {"reminders": get_reminders()}
+
 @app.route("/")
 def index():
     """Display the home page."""
-    # Load the home page template.
     return render_template("index.html")
 
 
@@ -196,20 +228,23 @@ def render_sortpage(title):
 def render_search():
     """Search assignments and subjects matching the user's search query."""
     # Get the search text entered by the user.
-    search = request.form.get("search", "")
+    search = request.form.get("search", "").strip()
 
     # Create a title using the search text.
     title = "Search for " + search
 
     # Find assignments or subjects containing the search text.
-    query = """
-        SELECT assignments.assignment_name, subjects.subject_name
-        FROM assignments
-        JOIN subjects
-        ON assignments.subject_id = subjects.id
-        WHERE assignments.assignment_name LIKE ?
-        OR subjects.subject_name LIKE ?
-    """
+    if not search:
+        tasks = []
+    else:
+        query = """
+            SELECT assignments.assignment_name, subjects.subject_name
+            FROM assignments
+            JOIN subjects
+            ON assignments.subject_id = subjects.id
+            WHERE assignments.assignment_name LIKE ?
+            OR subjects.subject_name LIKE ?
+        """
 
     # Add wildcards to allow partial matches.
     search = "%" + search + "%"
@@ -336,6 +371,12 @@ def change_theme(theme):
     return response
 
 
+@app.route("/reminders")
+def reminders():
+    """Display all upcoming reminders."""
+    return render_template("reminders.html")
+
+
 if __name__ == "__main__":
     # Run the Flask application.
-    app.run(host="0.0.0.0", port=81, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

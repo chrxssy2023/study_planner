@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2 class="page-title">All Reminders</h2>
+
+<div class="reminders-page">
+
+    {% if reminders %}
+
+        {% for reminder in reminders %}
+
+            <div class="reminder-item">
+
+                <h3>{{ reminder[0] }}</h3>
+
+                <p>Subject: {{ reminder[1] }}</p>
+
+                <p>Due: {{ reminder[2] }}</p>
+
+                <p>Priority: {{ reminder[3] }}</p>
+
+                <p>Status: {{ reminder[4] }}</p>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No upcoming reminders.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

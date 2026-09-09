@@ -146,16 +146,19 @@
 
                 <ul class="reminders">
 
-                    <li>English Essay - Today</li>
-                    <li>Physics Quiz - Tomorrow</li>
-                    <li>Biology Homework - Fri. 21 August</li>
-                    <li>Music exam - Tue. 25 August</li>
+                    {% for reminder in reminders %}
 
-                </ul>
+                    <li>
+                        {{ reminder[0] }} - {{ reminder[1] }}
+                    </li>
 
-                <span class="view-all">View All</span>
+                {% endfor %}
 
-            </section>
+                <a href="/reminders" class="view-all-button">View All</a>
+
+            </ul>
+
+</section>
 
         </aside>
 
