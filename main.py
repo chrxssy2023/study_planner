@@ -374,7 +374,57 @@ def change_theme(theme):
 @app.route("/reminders")
 def reminders():
     """Display all upcoming reminders."""
-    return render_template("reminders.html")
+
+    sort = request.args.get("sort", "due_date")
+
+    allowed_sorts = [
+        "assignment_name",
+        "subject_name",
+        "due_date",
+        "priority",
+        "status"
+    ]
+
+    if sort not in allowed_sorts:
+        sort = "due_date"
+
+    if sort == "status":
+        order_by = """
+            CASE assignments.status
+                WHEN 'Not Started' THEN 1
+                WHEN 'In Progress' THEN 2
+                WHEN 'Complete' THEN 3
+                ELSE 4
+            END
+        """
+    else:
+        order_by = sort
+
+    query = f"""
+        SELECT assignments.assignment_name,
+               subjects.subject_name,
+               assignments.due_date,
+               assignments.priority,
+               assignments.status
+        FROM assignments
+        JOIN subjects
+        ON assignments.subject_id = subjects.id
+        WHERE assignments.status != 'Complete'
+        ORDER BY {order_by}
+    """
+
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+
+    cur.execute(query)
+    all_reminders = cur.fetchall()
+
+    con.close()
+
+    return render_template(
+        "reminders.html",
+        reminders=all_reminders
+    )
 
 
 if __name__ == "__main__":
