@@ -10,50 +10,45 @@
 
         <h3>My Notes</h3>
 
-        <div class="note selected">
-            <strong>English Speech Structure</strong>
-            <small>English</small>
-        </div>
+        {% for note in notes %}
 
-        <div class="note">
-            <strong>Science Project</strong>
-            <small>Science</small>
-        </div>
+        <a href="/notes/{{ note[0] }}"
+           class="note {% if selected_note and selected_note[0] == note[0] %}selected{% endif %}">
 
-        <div class="note">
-            <strong>Music Lyrics</strong>
-            <small>Music</small>
-        </div>
+            <strong>{{ note[1] }}</strong>
 
-        <div class="note">
-            <strong>Important Notes</strong>
-            <small>General</small>
-        </div>
+            <small>Note</small>
+
+        </a>
+
+        {% endfor %}
 
     </div>
 
 
     <div class="note-content">
 
-        <div class="note-top">
-            <button>+ New Note</button>
-        </div>
+        {% if selected_note %}
 
         <div class="note-paper">
 
-            <h2>English Speech Structure</h2>
+            <h2>{{ selected_note[1] }}</h2>
 
-            <ol>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ol>
+            <p>{{ selected_note[2] }}</p>
 
         </div>
+
+        {% else %}
+
+        <div class="note-paper">
+
+            <h2>No notes yet</h2>
+
+            <p>You do not have any notes.</p>
+
+        </div>
+
+        {% endif %}
 
     </div>
 

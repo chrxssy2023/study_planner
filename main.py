@@ -148,6 +148,7 @@ def get_reminders():
         ORDER BY assignments.due_date ASC
         LIMIT 5
     """
+
     # Connect to the database.
     con = create_connection(DATABASE)
     cur = con.cursor()
@@ -176,7 +177,7 @@ def index():
     return render_template(
         "index.html",
         quote=quote
-        )
+    )
 
 
 @app.route("/sort/<title>")
@@ -253,19 +254,19 @@ def render_search():
             OR subjects.subject_name LIKE ?
         """
 
-    # Add wildcards to allow partial matches.
-    search = "%" + search + "%"
+        # Add wildcards to allow partial matches.
+        search = "%" + search + "%"
 
-    # Connect to the database.
-    con = create_connection(DATABASE)
-    cur = con.cursor()
+        # Connect to the database.
+        con = create_connection(DATABASE)
+        cur = con.cursor()
 
-    # Run the search query using the user's search text.
-    cur.execute(query, (search, search))
-    tasks = cur.fetchall()
+        # Run the search query using the user's search text.
+        cur.execute(query, (search, search))
+        tasks = cur.fetchall()
 
-    # Close the database connection.
-    con.close()
+        # Close the database connection.
+        con.close()
 
     # Display the search results.
     return render_template(
@@ -359,9 +360,45 @@ def calendar():
 
 
 @app.route("/notes")
-def notes():
+@app.route("/notes/<int:note_id>")
+def notes(note_id=None):
     """Display the notes page."""
-    return render_template("notes.html")
+    # Connect to the database.
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+
+    # Get all notes for the list.
+    cur.execute("""
+        SELECT id, title, note
+        FROM notes
+        ORDER BY created_at DESC
+    """)
+    notes_list = cur.fetchall()
+
+    # Get the selected note.
+    selected_note = None
+
+    if note_id is not None:
+        cur.execute("""
+            SELECT id, title, note
+            FROM notes
+            WHERE id = ?
+        """, (note_id,))
+        selected_note = cur.fetchone()
+
+    # Select the first note if no note was clicked.
+    elif notes_list:
+        selected_note = notes_list[0]
+
+    # Close the database connection.
+    con.close()
+
+    # Send the notes to the notes page.
+    return render_template(
+        "notes.html",
+        notes=notes_list,
+        selected_note=selected_note
+    )
 
 
 @app.route("/theme/<theme>")
