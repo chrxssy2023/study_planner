@@ -161,15 +161,22 @@ def get_reminders():
 
     return rows
 
+
 @app.context_processor
 def inject_reminders():
     """Make reminders available on every page."""
     return {"reminders": get_reminders()}
 
+
 @app.route("/")
 def index():
     """Display the home page."""
-    return render_template("index.html")
+    quote = get_quote()
+
+    return render_template(
+        "index.html",
+        quote=quote
+        )
 
 
 @app.route("/sort/<title>")
@@ -425,6 +432,26 @@ def reminders():
         "reminders.html",
         reminders=all_reminders
     )
+
+
+def get_quote():
+    """Get one quote from the database."""
+    query = """
+        SELECT quote, author
+        FROM quotes
+        ORDER BY RANDOM()
+        LIMIT 1
+    """
+
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+
+    cur.execute(query)
+    quote = cur.fetchone()
+
+    con.close()
+
+    return quote
 
 
 if __name__ == "__main__":

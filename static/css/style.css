@@ -57,7 +57,7 @@
     --hover: #3a3a3a;
     --white: #b7b5b5;
     --text: #f5f5f5;
-    --muted: #bbbbbb;
+    --muted: #757373;
 }
 
 .theme-colourblind {
@@ -395,9 +395,11 @@ main h2 {
 }
 
 .page-title {
-    text-decoration: underline;
-    text-transform: uppercase;
-    font-size: 1rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 38px;
+    margin: 0 0 15px 0;
 }
 
 main p {
@@ -476,12 +478,14 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 38px;
     margin-bottom: 15px;
 }
 
 .calendar-header h2 {
     margin: 0;
     font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .calendar-header button {
@@ -520,6 +524,8 @@ input[type="submit"]:hover {
     grid-template-columns: repeat(7, 1fr);
     background: var(--white);
     border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .day-name {
@@ -656,4 +662,24 @@ input[type="submit"]:hover {
 
 .view-all-button:hover {
     background-color: #ff5fa2;
+}
+
+.quote-box {
+    width: 70%;
+    margin: 30px auto;
+    padding: 25px;
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.quote-box p {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.quote-box span {
+    color: var(--muted);
 }
