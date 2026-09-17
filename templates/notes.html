@@ -17,8 +17,6 @@
 
             <strong>{{ note[1] }}</strong>
 
-            <small>Note</small>
-
         </a>
 
         {% endfor %}
@@ -36,6 +34,8 @@
 
             <p>{{ selected_note[2] }}</p>
 
+            <small>Created: {{ selected_note[3] }}</small>
+
         </div>
 
         {% else %}
@@ -45,6 +45,7 @@
             <h2>No notes yet</h2>
 
             <p>You do not have any notes.</p>
+            
 
         </div>
 

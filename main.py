@@ -316,11 +316,19 @@ def calendar():
     month = request.args.get("month", type=int)
     year = request.args.get("year", type=int)
 
+    # Get today's date.
+    today = datetime.today()
+
     # Use today's date if no month or year was selected.
     if month is None or year is None:
         today = datetime.today()
         month = today.month
         year = today.year
+
+    # Store today's day, month and year.
+    today_day = today.day
+    today_month = today.month
+    today_year = today.year
 
     # Get the requested calendar navigation option.
     change = request.args.get("change")
@@ -355,7 +363,10 @@ def calendar():
         month=month,
         year=year,
         month_name=month_name,
-        month_days=month_days
+        month_days=month_days,
+        today_day=today_day,
+        today_month=today_month,
+        today_year=today_year
     )
 
 
@@ -369,7 +380,7 @@ def notes(note_id=None):
 
     # Get all notes for the list.
     cur.execute("""
-        SELECT id, title, note
+        SELECT id, title, note, created_at
         FROM notes
         ORDER BY created_at DESC
     """)
@@ -380,7 +391,7 @@ def notes(note_id=None):
 
     if note_id is not None:
         cur.execute("""
-            SELECT id, title, note
+            SELECT id, title, note, created_at
             FROM notes
             WHERE id = ?
         """, (note_id,))

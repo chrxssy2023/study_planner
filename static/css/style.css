@@ -624,6 +624,13 @@ input[type="submit"]:hover {
     background: var(--light);
 }
 
+.day.today {
+    background-color: var(--hover);
+    border: 3px solid var(--primary_);
+    font-weight: bold;
+    color: var(--primary);
+}
+
 
 .other-month {
     color: var(--muted);

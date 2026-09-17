@@ -48,9 +48,19 @@
 
                 {% else %}
 
-                    <div class="day">
-                        {{ day }}
-                    </div>
+                    {% if day == today_day and month == today_month and year == today_year %}
+
+                        <div class="day today">
+                            {{ day }}
+                        </div>
+
+                    {% else %}
+
+                        <div class="day">
+                            {{ day }}
+                        </div>
+
+                    {% endif %}
 
                 {% endif %}
 
