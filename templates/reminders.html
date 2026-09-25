@@ -6,27 +6,27 @@
 <table>
     <tr>
         <th>
-            <a href="/reminders?sort=assignment_name">
+            <a href="/reminders?sort=assignment_name&order={{ order }}">
                 Assignments
             </a>
         </th>
         <th>
-            <a href="/reminders?sort=subject_name">
+            <a href="/reminders?sort=subject_name&order={{ order }}">
                 Subjects
             </a>
         </th>
         <th>
-            <a href="/reminders?sort=due_date">
+            <a href="/reminders?sort=due_date&order={{ order }}">
                 Due Date
             </a>
         </th>
         <th>
-            <a href="/reminders?sort=priority">
+            <a href="/reminders?sort=priority&order={{ order }}">
                 Priority
             </a>
         </th>
         <th>
-            <a href="/reminders?sort=status">
+            <a href="/reminders?sort=status&order={{ order }}">
                 Status
             </a>
         </th>
@@ -40,6 +40,7 @@
         <td>{{ row[3] }}</td>
         <td>{{ row[4] }}</td>
     </tr>
+
     {% else %}
     <tr>
         <td colspan="5">No upcoming reminders.</td>

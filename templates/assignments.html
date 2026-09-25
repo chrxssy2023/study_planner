@@ -6,31 +6,32 @@
 <table>
     <tr>
         <th>
-            <a href="/assignments?sort=assignment_name">
+            <a href="/assignments?sort=assignment_name&order={{ order }}">
                 Assignments
             </a>
         </th>
         <th>
-            <a href="/assignments?sort=subject_name">
+            <a href="/assignments?sort=subject_name&order={{ order }}">
                 Subjects
             </a>
         </th>
         <th>
-            <a href="/assignments?sort=due_date">
+            <a href="/assignments?sort=due_date&order={{ order }}">
                 Due Date
             </a>
         </th>
         <th>
-            <a href="/assignments?sort=priority">
+            <a href="/assignments?sort=priority&order={{ order }}">
                 Priority
             </a>
         </th>
         <th>
-            <a href="/assignments?sort=status">
+            <a href="/assignments?sort=status&order={{ order }}">
                 Status
             </a>
         </th>
     </tr>
+
     {% for row in assignments %}
     <tr>
         <td>{{ row[0] }}</td>
@@ -39,6 +40,7 @@
         <td>{{ row[3] }}</td>
         <td>{{ row[4] }}</td>
     </tr>
+
     {% else %}
     <tr>
         <td colspan="5">No assignments found.</td>

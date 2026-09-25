@@ -6,26 +6,27 @@
 <table>
     <tr>
         <th>
-            <a href="/subjects?sort=subject_name">
+            <a href="/subjects?sort=subject_name&order={{ order }}">
                 Subject
             </a>
         </th>
         <th>
-            <a href="/subjects?sort=teacher_name">
+            <a href="/subjects?sort=teacher_name&order={{ order }}">
                 Teacher
             </a>
         </th>
         <th>
-            <a href="/subjects?sort=room">
+            <a href="/subjects?sort=room&order={{ order }}">
                 Room
             </a>
         </th>
         <th>
-            <a href="/subjects?sort=credits">
+            <a href="/subjects?sort=credits&order={{ order }}">
                 Credits
             </a>
         </th>
     </tr>
+
     {% for row in subjects %}
     <tr>
         <td>{{ row[1] }}</td>
@@ -33,6 +34,7 @@
         <td>{{ row[3] }}</td>
         <td>{{ row[4] }}</td>
     </tr>
+
     {% else %}
     <tr>
         <td colspan="4">No subjects found.</td>
