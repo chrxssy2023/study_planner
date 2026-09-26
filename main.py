@@ -1,4 +1,4 @@
-"""Study Planner."""
+"""Studyous."""
 
 from flask import Flask, render_template, request, redirect
 import sqlite3
@@ -28,7 +28,7 @@ def create_connection(db_file):
     return None
 
 
-def get_subjects(sort="subject_name"):
+def get_subjects(sort="subject_name", order="asc"):
     """Get all the subjects from the database and sort them."""
     # List the columns that are allowed to be sorted.
     allowed_sorts = [
@@ -43,10 +43,8 @@ def get_subjects(sort="subject_name"):
     if sort not in allowed_sorts:
         sort = "subject_name"
 
-    # Sort credits from highest to lowest.
-    if sort == "credits":
-        order = "DESC"
-    else:
+    order = order.upper()
+    if order not in ("ASC", "DESC"):
         order = "ASC"
 
     # Select the subject information from the database.
@@ -70,7 +68,7 @@ def get_subjects(sort="subject_name"):
     return rows
 
 
-def get_assignments(sort="assignment_name"):
+def get_assignments(sort="assignment_name", order="asc"):
     """Get assignments and their subject names, then sort them."""
     # List the columns that can be used for sorting.
     allowed_sorts = [
@@ -111,12 +109,16 @@ def get_assignments(sort="assignment_name"):
         # Sort using the selected database column.
         order_by = sort
 
+    order = order.upper()
+    if order not in ("ASC", "DESC"):
+        order = "ASC"
+
     # Get assignments and match them with their subjects.
     query = f"""
         SELECT assignment_name, subject_name, due_date, priority, status
         FROM assignments a
         JOIN subjects s ON a.subject_id = s.id
-        ORDER BY {order_by}
+        ORDER BY {order_by} {order}
     """
 
     # Connect to the database.
@@ -282,14 +284,21 @@ def assignments():
     """Display all assignments from the database."""
     # Get the selected sorting option.
     sort = request.args.get("sort", "assignment_name")
+    order = request.args.get("order", "asc")
+
+    if order == "asc":
+        new_order = "desc"
+    else:
+        new_order = "asc"
 
     # Get the assignments using the selected sorting option.
-    assignment_list = get_assignments(sort)
+    assignment_list = get_assignments(sort, order)
 
     # Send the assignments to the assignments page.
     return render_template(
         "assignments.html",
-        assignments=assignment_list
+        assignments=assignment_list,
+        order=new_order
     )
 
 
@@ -298,14 +307,21 @@ def subjects():
     """Display all subjects from the database."""
     # Get the selected sorting option.
     sort = request.args.get("sort", "subject_name")
+    order = request.args.get("order", "asc")
+
+    if order == "asc":
+        new_order = "desc"
+    else:
+        new_order = "asc"
 
     # Get the subjects using the selected sorting option.
-    subject_list = get_subjects(sort)
+    subject_list = get_subjects(sort, order)
 
     # Send the subjects to the subjects page.
     return render_template(
         "subjects.html",
-        subjects=subject_list
+        subjects=subject_list,
+        order=new_order
     )
 
 
@@ -504,4 +520,4 @@ def get_quote():
 
 if __name__ == "__main__":
     # Run the Flask application.
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
