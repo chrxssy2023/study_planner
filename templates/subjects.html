@@ -1,25 +1,33 @@
 {% extends "base.html" %}
-
+<!-- Title of page -->
 {% block main %}
 <h2 class="page-title">All Subjects</h2>
 
+<!-- Reminders table -->
 <table>
     <tr>
+        <!-- Sort by subjet -->
         <th>
             <a href="/subjects?sort=subject_name&order={{ order }}">
                 Subject
             </a>
         </th>
+
+        <!-- Sort by teacher -->
         <th>
             <a href="/subjects?sort=teacher_name&order={{ order }}">
                 Teacher
             </a>
         </th>
+
+        <!-- Sort by room -->
         <th>
             <a href="/subjects?sort=room&order={{ order }}">
                 Room
             </a>
         </th>
+
+        <!-- Sort by credits -->
         <th>
             <a href="/subjects?sort=credits&order={{ order }}">
                 Credits
@@ -27,6 +35,7 @@
         </th>
     </tr>
 
+     <!-- Display each subjects -->
     {% for row in subjects %}
     <tr>
         <td>{{ row[1] }}</td>
@@ -35,6 +44,7 @@
         <td>{{ row[4] }}</td>
     </tr>
 
+    <!-- Shows message if there are no reminders -->
     {% else %}
     <tr>
         <td colspan="4">No subjects found.</td>

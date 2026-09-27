@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Sets the character encoding so the website can display text correctly -->
     <meta charset="UTF-8">
+
+    <!-- Sets the title shown in the browser tab -->
     <title>Studyous</title>
+
+    <!-- Links the HTML page to the main CSS stylesheet -->
     <link type="text/css" rel="stylesheet" href="/static/css/style.css">
 </head>
 
+
+<!-- Applies selected colour theme to whole website -->
 <body class="theme-{{ request.cookies.get('theme', 'pink') }}">
 
+    <!-- Top section of website with the title and navigation -->
     <header class="top-header">
 
+        <!-- Name on website -->
         <h1 class="site-title">Studyous</h1>
 
         <div class="header-row">
 
+            <!-- Contains the navigation bar, theme selector and search bar -->
             <div class="nav-bar">
 
+                <!-- Main navigation links to the different pages -->
                 <nav class="main-nav">
                     <ul>
 
+                        <!-- Link to homepage -->
                         <li>
                             <a href="/">
                                 <img src="/static/images/home.svg"
@@ -28,6 +41,7 @@
                             </a>
                         </li>
 
+                        <!-- Link to assignments page -->
                         <li>
                             <a href="/assignments">
                                 <img src="/static/images/assignments.svg"
@@ -37,6 +51,7 @@
                             </a>
                         </li>
 
+                        <!-- Link to subjects page -->
                         <li>
                             <a href="/subjects">
                                 <img src="/static/images/subjects.svg"
@@ -46,6 +61,7 @@
                             </a>
                         </li>
 
+                        <!-- Link to calendar page -->
                         <li>
                             <a href="/calendar">
                                 <img src="/static/images/calendar.svg"
@@ -55,6 +71,7 @@
                             </a>
                         </li>
 
+                        <!-- Link to notes page -->
                         <li>
                             <a href="/notes">
                                 <img src="/static/images/notes.svg"
@@ -67,27 +84,45 @@
                     </ul>
                 </nav>
 
+
+                <!-- Theme selection menu -->
                 <div class="theme-menu">
 
-                    <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" 
-                        viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
-                        <path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 
-                        32.5-156t88-127Q256-817 330-848.5T488-880q80 0 151 27.5t124.5 76q53.5 48.5 85 115T880-518q0 
-                        115-70 176.5T640-280h-74q-9 0-12.5 5t-3.5 11q0 12 15 34.5t15 51.5q0 50-27.5 74T480-80Zm0-400Zm-177 
-                        23q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm120-160q17-17 
-                        17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm200 0q17-17 17-43t-17-43q-17-17-43-17t-43 
-                        17q-17 17-17 43t17 43q17 17 43 17t43-17Zm120 160q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 
-                        43t17 43q17 17 43 17t43-17ZM480-160q9 0 14.5-5t5.5-13q0-14-15-33t-15-57q0-42 29-67t71-25h70q66 0 
-                        113-38.5T800-518q0-121-92.5-201.5T488-800q-136 0-232 93t-96 227q0 133 93.5 226.5T480-160Z"/></svg></span>
+                    <!-- Displays the colour/theme icon -->
+                    <span class="theme-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             height="24px"
+                             viewBox="0 -960 960 960"
+                             width="24px"
+                             fill="#FFFFFF">
 
+                            <!-- SVG path for art palette  -->
+                            <path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 
+                            32.5-156t88-127Q256-817 330-848.5T488-880q80 0 151 27.5t124.5 76q53.5 48.5 
+                            85 115T880-518q0 115-70 176.5T640-280h-74q-9 0-12.5 5t-3.5 11q0 12 15 
+                            34.5t15 51.5q0 50-27.5 74T480-80Zm0-400Zm-177 23q17-17 17-43t-17-43q-17-17 
+                            -43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm120-160q17-17 17-43t-17-43q-17-17 
+                            -43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm200 0q17-17 17-43t-17-43q-17-17 
+                            -43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm120 160q17-17 17-43t-17-43q-17-17 
+                            -43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17ZM480-160q9 0 14.5-5t5.5-13q0-14-15-33t-15-57q0-42 
+                            29-67t71-25h70q66 0 113-38.5T800-518q0-121-92.5-201.5T488-800q-136 0-232 93t-96 227q0 133 93.5 226.5T480-160Z"/>
+                        </svg>
+                    </span>
+
+
+                    <!-- All the available colour theme in website -->
                     <div class="theme-options">
 
+                        <!-- Changes website to pink theme -->
                         <a href="/theme/pink">Pink</a>
 
+                        <!-- Changes website to light theme -->
                         <a href="/theme/light">Light</a>
 
+                        <!-- Changes website to dark theme -->
                         <a href="/theme/dark">Dark</a>
 
+                        <!-- Changes website colour to high contrast/orange and blue theme -->
                         <a href="/theme/colourblind">High Contrast</a>
 
                     </div>
@@ -95,17 +130,18 @@
                 </div>
 
 
-                <!-- Search bar -->
-
+                <!-- Search bar used to search for information in the website -->
                 <form class="search-form" method="POST" action="/search">
 
                     <div class="search-box">
 
+                        <!-- Allows user to enter their search term -->
                         <input type="text"
                                name="search"
                                id="search"
                                placeholder="Search...">
 
+                        <!-- Displays the search icon -->
                         <span class="search-icon"
                               aria-hidden="true"></span>
 
@@ -119,28 +155,35 @@
     </header>
 
 
+    <!-- Main container holding the sidebar and page content -->
     <div class="body-container">
 
+        <!-- Sidebar containing quick links and reminders -->
         <aside class="sidebar">
 
+            <!-- Quick links section -->
             <section class="sidebar-box">
 
                 <h2>Quick Links</h2>
 
                 <ul class="quick-links">
 
+                    <!-- Quick link to assignments -->
                     <li>
                         <a href="/assignments">View Assignments</a>
                     </li>
 
+                    <!-- Quick link to subjects -->
                     <li>
                         <a href="/subjects">View Subjects</a>
                     </li>
 
+                    <!-- Quick link to calendar -->
                     <li>
                         <a href="/calendar">View Calendar</a>
                     </li>
 
+                    <!-- Quick link to notes -->
                     <li>
                         <a href="/notes">View Notes</a>
                     </li>
@@ -150,33 +193,43 @@
             </section>
 
 
+            <!-- Reminders section showing upcoming assignments -->
             <section class="sidebar-box">
 
                 <h2>Reminders</h2>
 
                 <ul class="reminders">
 
+                    <!-- Loops through each reminder returned by Flask -->
                     {% for reminder in reminders %}
 
+                    <!-- Displays each reminder as a clickable link -->
                     <li>
-                    <a href="/reminders?id={{ reminder[0] }}">
-                        {{ reminder[1] }} - {{ reminder[2] }}
-                    </a >
+                        <a href="/reminders?id={{ reminder[0] }}">
+                            {{ reminder[1] }} - {{ reminder[2] }}
+                        </a>
                     </li>
 
-                {% endfor %}
+                    {% endfor %}
 
-                <a href="/reminders" class="view-all-button">View All</a>
+                    <!-- Link to the page containing all reminders -->
+                    <a href="/reminders" class="view-all-button">
+                        View All
+                    </a>
 
-            </ul>
+                </ul>
 
-</section>
+            </section>
 
         </aside>
 
 
+        <!-- Main area where content of each page is shown -->
         <main>
+
+            <!-- Flask/Jinja inserts the content of each individual page here -->
             {% block main %}{% endblock %}
+
         </main>
 
     </div>
