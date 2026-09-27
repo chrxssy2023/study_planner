@@ -493,13 +493,16 @@ def reminders():
     if assignment_id:
         row = get_reminder_by_id(assignment_id)
         reminder_list = [row] if row else []
+        page_title = "Reminder"
     else:
         reminder_list = get_assignments(sort, order, incomplete_only=True)
+        page_title = "All Reminders"
 
     return render_template(
         "reminders.html",
         all_reminders=reminder_list,
         order=new_order,
+        page_title=page_title
     )
 
 
