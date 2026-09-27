@@ -367,6 +367,15 @@ nav a:hover .nav-icon {
     border-bottom: 1px solid var(--border);
 }
 
+.reminders a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.reminders a:hover {
+    color: var(--primary);
+}
 
 .quick-links,
 .reminders {

@@ -67,9 +67,6 @@
                     </ul>
                 </nav>
 
-
-                <!-- Theme button comes BEFORE the search bar -->
-
                 <div class="theme-menu">
 
                     <span class="theme-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" 
@@ -162,7 +159,9 @@
                     {% for reminder in reminders %}
 
                     <li>
-                        {{ reminder[0] }} - {{ reminder[1] }}
+                    <a href="/reminders?id={{ reminder[0] }}">
+                        {{ reminder[1] }} - {{ reminder[2] }}
+                    </a >
                     </li>
 
                 {% endfor %}

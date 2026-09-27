@@ -68,7 +68,7 @@ def get_subjects(sort="subject_name", order="asc"):
     return rows
 
 
-def get_assignments(sort="assignment_name", order="asc"):
+def get_assignments(sort="assignment_name", order="asc", incomplete_only=False):
     """Get assignments and their subject names, then sort them."""
     # List the columns that can be used for sorting.
     allowed_sorts = [
@@ -100,7 +100,7 @@ def get_assignments(sort="assignment_name", order="asc"):
             CASE status
                 WHEN 'Not Started' THEN 1
                 WHEN 'In Progress' THEN 2
-                WHEN 'Complete' THEN 3
+                WHEN 'Completed' THEN 3
                 ELSE 4
             END
         """
@@ -113,11 +113,16 @@ def get_assignments(sort="assignment_name", order="asc"):
     if order not in ("ASC", "DESC"):
         order = "ASC"
 
+    where_clause = ""
+    if incomplete_only:
+        where_clause = "WHERE a.status != 'Completed'"
+
     # Get assignments and match them with their subjects.
     query = f"""
         SELECT assignment_name, subject_name, due_date, priority, status
         FROM assignments a
         JOIN subjects s ON a.subject_id = s.id
+        {where_clause}
         ORDER BY {order_by} {order}
     """
 
@@ -135,10 +140,29 @@ def get_assignments(sort="assignment_name", order="asc"):
     return rows
 
 
+def get_reminder_by_id(assignment_id):
+    """Get one incomplete assignment for the reminder detail view."""
+    query = """
+        SELECT a.assignment_name, s.subject_name, a.due_date, a.priority, a.status
+        FROM assignments a
+        JOIN subjects s ON a.subject_id = s.id
+        WHERE a.id = ? AND a.status != 'Completed'
+    """
+
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+    cur.execute(query, (assignment_id,))
+    row = cur.fetchone()
+    con.close()
+
+    return row
+
+
 def get_reminders():
     """Get upcoming assignments to display as reminders in the sidebar."""
     query = """
-        SELECT assignments.assignment_name,
+        SELECT assignments.id,
+               assignments.assignment_name,
                subjects.subject_name,
                assignments.due_date,
                assignments.priority,
@@ -146,7 +170,7 @@ def get_reminders():
         FROM assignments
         JOIN subjects
         ON assignments.subject_id = subjects.id
-        WHERE assignments.status != 'Complete'
+        WHERE assignments.status != 'Completed'
         ORDER BY assignments.due_date ASC
         LIMIT 5
     """
@@ -445,56 +469,37 @@ def change_theme(theme):
 @app.route("/reminders")
 def reminders():
     """Display all upcoming reminders."""
+    assignment_id = request.args.get("id", type=int)
 
     sort = request.args.get("sort", "due_date")
+    order = request.args.get("order", "asc")
 
     allowed_sorts = [
         "assignment_name",
         "subject_name",
         "due_date",
         "priority",
-        "status"
+        "status",
     ]
 
     if sort not in allowed_sorts:
         sort = "due_date"
 
-    if sort == "status":
-        order_by = """
-            CASE assignments.status
-                WHEN 'Not Started' THEN 1
-                WHEN 'In Progress' THEN 2
-                WHEN 'Complete' THEN 3
-                ELSE 4
-            END
-        """
+    if order == "asc":
+        new_order = "desc"
     else:
-        order_by = sort
+        new_order = "asc"
 
-    query = f"""
-        SELECT assignments.assignment_name,
-               subjects.subject_name,
-               assignments.due_date,
-               assignments.priority,
-               assignments.status
-        FROM assignments
-        JOIN subjects
-        ON assignments.subject_id = subjects.id
-        WHERE assignments.status != 'Complete'
-        ORDER BY {order_by}
-    """
-
-    con = create_connection(DATABASE)
-    cur = con.cursor()
-
-    cur.execute(query)
-    all_reminders = cur.fetchall()
-
-    con.close()
+    if assignment_id:
+        row = get_reminder_by_id(assignment_id)
+        reminder_list = [row] if row else []
+    else:
+        reminder_list = get_assignments(sort, order, incomplete_only=True)
 
     return render_template(
         "reminders.html",
-        reminders=all_reminders
+        all_reminders=reminder_list,
+        order=new_order,
     )
 
 
@@ -520,4 +525,4 @@ def get_quote():
 
 if __name__ == "__main__":
     # Run the Flask application.
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
