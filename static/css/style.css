@@ -1,3 +1,4 @@
+/* Set consistent sizing and spacing for all elements */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,6 +6,7 @@
 }
 
 
+/* Set the main colours used throughout the website */
 :root {
     --background: #fff0f7;
     --header: #f45a9e;
@@ -20,6 +22,7 @@
 }
 
 
+/* Pink colour theme */
 .theme-pink {
     --background: #fff0f7;
     --header: #f45a9e;
@@ -35,6 +38,7 @@
 }
 
 
+/* Light colour theme */
 .theme-light {
     --background: #f2f2f7;
     --header: #cfcfcf;
@@ -50,6 +54,7 @@
 }
 
 
+/* Dark colour theme */
 .theme-dark {
     --background: #949292;
     --header: #4b4a4a;
@@ -65,6 +70,7 @@
 }
 
 
+/* COlourblind high contrast colour theme */
 .theme-colourblind {
     --background: #ffffff;
     --header: #0072b2;
@@ -80,6 +86,7 @@
 }
 
 
+/* Style the view all button */
 .view-all-button {
     display: block;
     width: fit-content;
@@ -92,6 +99,7 @@
 }
 
 
+/* Set the view all button colour for each theme */
 .theme-pink .view-all-button {
     background-color: #f6b8d3;
 }
@@ -132,12 +140,14 @@
 }
 
 
+/* Make the page fill the full height */
 html,
 body {
     height: 100%;
 }
 
 
+/* Sets the main website layout */
 body {
     display: flex;
     flex-direction: column;
@@ -148,12 +158,14 @@ body {
 }
 
 
+/* Style the top header */
 .top-header {
     background: var(--header);
     padding: 20px 30px 0;
 }
 
 
+/* Style the Studyous title */
 .site-title {
     font-size: 2.8rem;
     font-weight: 900;
@@ -165,6 +177,7 @@ body {
 }
 
 
+/* Style the row containing the navigation bar */
 .header-row {
     margin: 0 -30px;
     padding: 0 30px 14px;
@@ -172,6 +185,7 @@ body {
 }
 
 
+/* Style the navigation bar */
 .nav-bar {
     display: flex;
     align-items: center;
@@ -186,6 +200,7 @@ body {
 }
 
 
+/* Set the layout of the main navigation */
 .main-nav {
     flex: 1 1 auto;
     min-width: 0;
@@ -194,6 +209,7 @@ body {
 }
 
 
+/* Show the navigation links in a row */
 nav ul {
     display: flex;
     flex-wrap: wrap;
@@ -203,6 +219,7 @@ nav ul {
 }
 
 
+/* Style the navigation links */
 nav a {
     display: inline-flex;
     align-items: center;
@@ -215,6 +232,7 @@ nav a {
 }
 
 
+/* Set the size of navigation icons */
 .nav-icon {
     width: 18px;
     height: 18px;
@@ -223,6 +241,7 @@ nav a {
 }
 
 
+/* Underlines the navigation link when mouse hovers over it */
 nav a:hover {
     color: var(--background);
     text-decoration: underline;
@@ -234,6 +253,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Position the colour theme menu */
 .theme-menu {
     position: relative;
     display: flex;
@@ -242,6 +262,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the colour theme icon */
 .theme-icon {
     font-size: 1.4rem;
     cursor: pointer;
@@ -249,6 +270,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Hide the theme options until the mouse hovers over the menu */
 .theme-options {
     display: none;
     position: absolute;
@@ -263,11 +285,13 @@ nav a:hover .nav-icon {
 }
 
 
+/* Show all the theme options when the mouse hovers over */
 .theme-menu:hover .theme-options {
     display: block;
 }
 
 
+/* Style the theme options */
 .theme-options a {
     display: block;
     padding: 10px;
@@ -282,6 +306,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the search form */
 .search-form {
     flex: 0 1 clamp(140px, 22vw, 280px);
     min-width: 120px;
@@ -292,6 +317,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Position the search box and icon */
 .search-box {
     position: relative;
     display: flex;
@@ -300,6 +326,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the search input */
 .search-box input[type="text"] {
     width: 100%;
     padding: 8px 36px 8px 12px;
@@ -311,12 +338,16 @@ nav a:hover .nav-icon {
 }
 
 
+
+
+/* Border darkens when search bar is selected */
 .search-box input[type="text"]:focus {
     outline: none;
     border-color: var(--primary);
 }
 
 
+/* Add the search icon to the search box */
 .search-icon {
     position: absolute;
     right: 10px;
@@ -330,6 +361,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Create the main content and sidebar layout */
 .body-container {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -338,6 +370,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the sidebar */
 .sidebar {
     padding: 20px 16px;
     background: var(--sidebar);
@@ -347,6 +380,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the boxes inside the sidebar */
 .sidebar-box {
     border: 2px solid var(--border);
     border-radius: 12px;
@@ -356,6 +390,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the sidebar headings */
 .sidebar-box h2 {
     font-size: 0.85rem;
     font-weight: 900;
@@ -367,6 +402,8 @@ nav a:hover .nav-icon {
     border-bottom: 1px solid var(--border);
 }
 
+
+/* Style reminder links */
 .reminders a {
     color: inherit;
     text-decoration: none;
@@ -377,12 +414,15 @@ nav a:hover .nav-icon {
     color: var(--primary);
 }
 
+
+/* Remove the default list/bulletpoint styling */
 .quick-links,
 .reminders {
     list-style: none;
 }
 
 
+/* Style items in the quick links and reminders lists */
 .quick-links li,
 .reminders li {
     padding: 8px 0;
@@ -397,6 +437,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the quick links */
 .quick-links li {
     display: flex;
     justify-content: space-between;
@@ -406,6 +447,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style links inside the quick links section */
 .quick-links a {
     color: var(--primary);
     text-decoration: none;
@@ -417,6 +459,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Add an arrow for each quick link */
 .quick-links li::after,
 .quick-links a::after {
     content: "›";
@@ -430,6 +473,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the view all link */
 .view-all {
     display: block;
     margin-top: 10px;
@@ -441,6 +485,7 @@ nav a:hover .nav-icon {
 }
 
 
+/* Style the main content area */
 main {
     padding: 30px;
     background: var(--background);
@@ -448,6 +493,7 @@ main {
 }
 
 
+/* Style the main headings */
 main h2 {
     color: var(--primary);
     margin-bottom: 20px;
@@ -455,6 +501,7 @@ main h2 {
 }
 
 
+/* Style page titles */
 .page-title {
     text-decoration: none;
     font-size: 1.5rem;
@@ -464,12 +511,14 @@ main h2 {
 }
 
 
+/* Style paragraphs in the main page */
 main p {
     margin-bottom: 15px;
     line-height: 1.6;
 }
 
 
+/* Style tables used throughout the website */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -480,6 +529,7 @@ table {
 }
 
 
+/* Style table headings */
 th {
     background: var(--header);
     color: var(--white);
@@ -488,6 +538,7 @@ th {
 }
 
 
+/* Style links in table headings */
 th a {
     color: var(--white);
     text-decoration: none;
@@ -499,27 +550,32 @@ th a:hover {
 }
 
 
+/* Style table cells */
 td {
     padding: 14px;
     border-bottom: 1px solid var(--border);
 }
 
 
+/* Add alternating colours to table rows */
 tr:nth-child(even) {
     background: var(--light);
 }
 
 
+/* Change the table row colour when mouse hovers over */
 tr:hover {
     background: var(--hover);
 }
 
 
+/* Add spacing below forms */
 form:not(.search-form) {
     margin-bottom: 20px;
 }
 
 
+/* Style text input fields */
 input[type="text"] {
     padding: 8px 10px;
     border: 2px solid var(--border);
@@ -529,6 +585,7 @@ input[type="text"] {
 }
 
 
+/* Style submit buttons */
 input[type="submit"] {
     padding: 8px 16px;
     background: var(--header);
@@ -539,16 +596,19 @@ input[type="submit"] {
 }
 
 
+/* Change the submit button when mouse hovers over */
 input[type="submit"]:hover {
     background: var(--primary);
 }
 
 
+/* Style the calendar */
 .calendar {
     width: 100%;
 }
 
 
+/* Style the calendar header */
 .calendar-header {
     display: flex;
     justify-content: space-between;
@@ -558,6 +618,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the calendar month and year */
 .calendar-header h2 {
     margin: 0;
     font-size: 1.5rem;
@@ -565,6 +626,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style calendar buttons */
 .calendar-header button {
     padding: 7px 12px;
     background: var(--white);
@@ -585,6 +647,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the calendar navigation buttons */
 .calendar-button {
     display: inline-block;
     padding: 8px 14px;
@@ -601,6 +664,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Create seven-columns in the calendar grid */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -611,6 +675,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the names of the days */
 .day-name {
     background: var(--header);
     color: var(--white);
@@ -620,6 +685,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style each day in the calendar */
 .day {
     height: 100px;
     padding: 8px;
@@ -633,6 +699,8 @@ input[type="submit"]:hover {
     background: var(--light);
 }
 
+
+/* Highlight current day */
 .day.today {
     background-color: var(--hover);
     border: 3px solid var(--primary_);
@@ -641,6 +709,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Display days outside the selected month */
 .other-month {
     color: var(--muted);
     background: var(--light);
@@ -648,7 +717,6 @@ input[type="submit"]:hover {
 
 
 /* Notes page */
-
 .notes {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -656,6 +724,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the list of notes */
 .notes-list {
     background: var(--white);
     border: 2px solid var(--border);
@@ -664,6 +733,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the notes list heading */
 .notes-list h3 {
     margin: 0;
     padding: 15px;
@@ -674,6 +744,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style each note in the list */
 .note {
     display: block;
     padding: 13px;
@@ -684,6 +755,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the note title */
 .note strong {
     display: block;
     font-size: 0.9rem;
@@ -696,22 +768,26 @@ input[type="submit"]:hover {
 }
 
 
+/* Change the my notes background when mouse hovers over */
 .note:hover {
     background: var(--light);
 }
 
 
+/* Highlight the selected note */
 .note.selected {
     background: var(--hover);
     border-left: 4px solid var(--header);
 }
 
 
+/* Style the selected note content area */
 .note-content {
     width: 100%;
 }
 
 
+/* Style the note paper */
 .note-paper {
     min-height: 550px;
     padding: 30px;
@@ -721,6 +797,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the note title */
 .note-paper h2 {
     color: var(--text);
     font-size: 1.4rem;
@@ -730,12 +807,14 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the note content */
 .note-paper p {
     margin-top: 20px;
     line-height: 1.6;
 }
 
 
+/* Style the view all button */
 .view-all-button {
     display: block;
     width: fit-content;
@@ -749,11 +828,13 @@ input[type="submit"]:hover {
 }
 
 
+/* Change the view all button when mouse hovers over */
 .view-all-button:hover {
     background-color: #ff5fa2;
 }
 
 
+/* Style the motivational quote box */
 .quote-box {
     width: 70%;
     margin: 30px auto;
@@ -765,6 +846,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the quote text */
 .quote-box p {
     color: var(--primary);
     font-size: 1.2rem;
@@ -772,6 +854,7 @@ input[type="submit"]:hover {
 }
 
 
+/* Style the quote author */
 .quote-box span {
     color: var(--muted);
 }

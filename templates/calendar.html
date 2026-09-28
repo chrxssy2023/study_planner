@@ -2,22 +2,28 @@
 
 {% block main %}
 
+<!-- Main calendar section -->
 <div class="calendar">
 
+    <!-- Calendar header showing the current month and navigation buttons -->
     <div class="calendar-header">
 
+        <!-- Displays the month and year -->
         <h2>{{ month_name }} {{ year }}</h2>
 
         <div>
 
+            <!-- Button to move to previous months -->
             <a class="calendar-button" href="/calendar?month={{ month }}&year={{ year }}&change=previous">
                 &lt;
             </a>
 
+            <!-- Button to return to current month -->
             <a class="calendar-button" href="/calendar">
                 Today
             </a>
 
+            <!-- Button to move to the next month -->
             <a class="calendar-button" href="/calendar?month={{ month }}&year={{ year }}&change=next">
                 &gt;
             </a>
@@ -27,8 +33,10 @@
     </div>
 
 
+    <!-- Calendar grid containing days of the week and dates -->
     <div class="calendar-grid">
 
+        <!-- Shows hte names of each day -->
         <div class="day-name">Mon</div>
         <div class="day-name">Tue</div>
         <div class="day-name">Wed</div>
@@ -38,24 +46,30 @@
         <div class="day-name">Sun</div>
 
 
+        <!-- Loop through each week in the selected month -->
         {% for week in month_days %}
 
+            <!-- Loop through each day in the week -->
             {% for day in week %}
 
+                <!-- Empty days shown for dates outside the current month -->
                 {% if day == 0 %}
 
                     <div class="day other-month"></div>
 
                 {% else %}
 
+                    <!-- Check if the date is todays date -->
                     {% if day == today_day and month == today_month and year == today_year %}
 
+                        <!-- Added the today class to highlight the current day -->
                         <div class="day today">
                             {{ day }}
                         </div>
 
                     {% else %}
 
+                        <!-- Display the day -->
                         <div class="day">
                             {{ day }}
                         </div>

@@ -2,16 +2,21 @@
 
 {% block main %}
 
+<!-- Title of page -->
 <h2 class="page-title">Notes</h2>
 
+<!-- Main notes section containing the note list and selected note -->
 <div class="notes">
 
+    <!-- Displays a list of all notes -->
     <div class="notes-list">
 
         <h3>My Notes</h3>
 
+        <!-- Loop through each note from the database -->
         {% for note in notes %}
 
+        <!-- Makes all the notes clickable so user can view each note -->
         <a href="/notes/{{ note[0] }}"
            class="note {% if selected_note and selected_note[0] == note[0] %}selected{% endif %}">
 
@@ -23,21 +28,26 @@
 
     </div>
 
-
+    <!-- Displays all content of the selected note -->
     <div class="note-content">
 
+        <!-- Checks if a note has been selected -->
         {% if selected_note %}
 
         <div class="note-paper">
 
+            <!-- Display the selected notes title -->
             <h2>{{ selected_note[1] }}</h2>
 
+            <!-- Display the selected notes content -->
             <p>{{ selected_note[2] }}</p>
 
+            <!-- Display when the note was created -->
             <small>Created: {{ selected_note[3] }}</small>
 
         </div>
 
+        <!-- If no note is selected, display a message -->
         {% else %}
 
         <div class="note-paper">
