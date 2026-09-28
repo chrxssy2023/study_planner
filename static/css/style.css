@@ -6,32 +6,32 @@
 
 
 :root {
-    --background: #fff5fa;
-    --header: #ff7eb6;
-    --nav: #ff9ec7;
-    --sidebar: #ffd6e8;
-    --primary: #d63384;
-    --border: #ffb3d1;
-    --light: #fff0f6;
-    --hover: #ffe4ef;
+    --background: #fff0f7;
+    --header: #f45a9e;
+    --nav: #f77db5;
+    --sidebar: #ffc1d8;
+    --primary: #e83f8f;
+    --border: #f9a4c8;
+    --light: #ffe4f0;
+    --hover: #fac4da;
     --white: #ffffff;
     --text: #333333;
-    --muted: #888888;
+    --muted: #777777;
 }
 
 
 .theme-pink {
-    --background: #fff5fa;
-    --header: #ff7eb6;
-    --nav: #ff9ec7;
-    --sidebar: #ffd6e8;
-    --primary: #d63384;
-    --border: #ffb3d1;
-    --light: #fff0f6;
-    --hover: #ffe4ef;
+    --background: #fff0f7;
+    --header: #f45a9e;
+    --nav: #f77db5;
+    --sidebar: #ffc1d8;
+    --primary: #e83f8f;
+    --border: #f9a4c8;
+    --light: #ffe4f0;
+    --hover: #fac4da;
     --white: #ffffff;
     --text: #333333;
-    --muted: #888888;
+    --muted: #777777;
 }
 
 

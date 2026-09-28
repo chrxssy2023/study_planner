@@ -3,40 +3,43 @@
 {% block main %}
 <h2 class="page-title">{{ page_title }}</h2>
 
+<!-- Store the selected reminder ID so sorting keeps the user on the same reminder -->
+{% set reminder_id = request.args.get('id') %}
+
 <!-- Reminders table -->
 <table>
     <tr>
         <!-- Sort by assignment -->
         <th>
-            <a href="/reminders?sort=assignment_name&order={{ order }}">
+            <a href="/reminders?id={{ reminder_id }}&sort=assignment_name&order={{ order }}">
                 Assignments
             </a>
         </th>
 
         <!-- Sort by subject -->
         <th>
-            <a href="/reminders?sort=subject_name&order={{ order }}">
+            <a href="/reminders?id={{ reminder_id }}&sort=subject_name&order={{ order }}">
                 Subjects
             </a>
         </th>
 
         <!-- Sort by due date -->
         <th>
-            <a href="/reminders?sort=due_date&order={{ order }}">
+            <a href="/reminders?id={{ reminder_id }}&sort=due_date&order={{ order }}">
                 Due Date
             </a>
         </th>
 
         <!-- Sort by priority -->
         <th>
-            <a href="/reminders?sort=priority&order={{ order }}">
+            <a href="/reminders?id={{ reminder_id }}&sort=priority&order={{ order }}">
                 Priority
             </a>
         </th>
 
         <!-- Sort by status -->
         <th>
-            <a href="/reminders?sort=status&order={{ order }}">
+            <a href="/reminders?id={{ reminder_id }}&sort=status&order={{ order }}">
                 Status
             </a>
         </th>
