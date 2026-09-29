@@ -9,7 +9,7 @@
     <div class="calendar-header">
 
         <!-- Displays the month and year -->
-        <h2>{{ month_name }} {{ year }}</h2>
+        <h1>{{ month_name }} {{ year }}</h1>
 
         <div>
 
@@ -49,36 +49,36 @@
         <!-- Loop through each week in the selected month -->
         {% for week in month_days %}
 
-            <!-- Loop through each day in the week -->
-            {% for day in week %}
+        <!-- Loop through each day in the week -->
+        {% for day in week %}
 
-                <!-- Empty days shown for dates outside the current month -->
-                {% if day == 0 %}
+        <!-- Empty days shown for dates outside the current month -->
+        {% if day == 0 %}
 
-                    <div class="day other-month"></div>
+        <div class="day other-month"></div>
 
-                {% else %}
+        {% else %}
 
-                    <!-- Check if the date is todays date -->
-                    {% if day == today_day and month == today_month and year == today_year %}
+        <!-- Check if the date is todays date -->
+        {% if day == today_day and month == today_month and year == today_year %}
 
-                        <!-- Added the today class to highlight the current day -->
-                        <div class="day today">
-                            {{ day }}
-                        </div>
+        <!-- Added the today class to highlight the current day -->
+        <div class="day today">
+            {{ day }}
+        </div>
 
-                    {% else %}
+        {% else %}
 
-                        <!-- Display the day -->
-                        <div class="day">
-                            {{ day }}
-                        </div>
+        <!-- Display the day -->
+        <div class="day">
+            {{ day }}
+        </div>
 
-                    {% endif %}
+        {% endif %}
 
-                {% endif %}
+        {% endif %}
 
-            {% endfor %}
+        {% endfor %}
 
         {% endfor %}
 

@@ -3,66 +3,69 @@
 {% block main %}
 
 <!-- Title of page -->
-<h2 class="page-title">{{ page_title }}</h2>
+<h1 class="page-title">{{ page_title }}</h1>
 
 <!-- Store the selected reminder ID so sorting keeps the user on the same reminder -->
 {% set reminder_id = request.args.get('id') %}
 
 <!-- Reminders table -->
 <table>
-    <tr>
-        <!-- Sort by assignment -->
-        <th>
-            <a href="/reminders?id={{ reminder_id }}&sort=assignment_name&order={{ order }}">
-                Assignments
-            </a>
-        </th>
+    <tbody>
+        <tr>
+            <!-- Sort by assignment -->
+            <th scope="col">
+                <a href="/reminders?id={{ reminder_id }}&sort=assignment_name&order={{ order }}">
+                    Assignments
+                </a>
+            </th>
 
-        <!-- Sort by subject -->
-        <th>
-            <a href="/reminders?id={{ reminder_id }}&sort=subject_name&order={{ order }}">
-                Subjects
-            </a>
-        </th>
+            <!-- Sort by subject -->
+            <th scope="col">
+                <a href="/reminders?id={{ reminder_id }}&sort=subject_name&order={{ order }}">
+                    Subjects
+                </a>
+            </th>
 
-        <!-- Sort by due date -->
-        <th>
-            <a href="/reminders?id={{ reminder_id }}&sort=due_date&order={{ order }}">
-                Due Date
-            </a>
-        </th>
+            <!-- Sort by due date -->
+            <th scope="col">
+                <a href="/reminders?id={{ reminder_id }}&sort=due_date&order={{ order }}">
+                    Due Date
+                </a>
+            </th>
 
-        <!-- Sort by priority -->
-        <th>
-            <a href="/reminders?id={{ reminder_id }}&sort=priority&order={{ order }}">
-                Priority
-            </a>
-        </th>
+            <!-- Sort by priority -->
+            <th scope="col">
+                <a href="/reminders?id={{ reminder_id }}&sort=priority&order={{ order }}">
+                    Priority
+                </a>
+            </th>
 
-        <!-- Sort by status -->
-        <th>
-            <a href="/reminders?id={{ reminder_id }}&sort=status&order={{ order }}">
-                Status
-            </a>
-        </th>
-    </tr>
+            <!-- Sort by status -->
+            <th scope="col">
+                <a href="/reminders?id={{ reminder_id }}&sort=status&order={{ order }}">
+                    Status
+                </a>
+            </th>
+        </tr>
 
-    <!-- Display each reminder -->
-    {% for row in all_reminders %}
-    <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-        <td>{{ row[4] }}</td>
-    </tr>
+        <!-- Display each reminder -->
+        {% for row in all_reminders %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+        </tr>
 
-    <!-- Shows message if there are no reminders -->
-    {% else %}
-    <tr>
-        <td colspan="5">No upcoming reminders.</td>
-    </tr>
-    {% endfor %}
+        <!-- Shows message if there are no reminders -->
+        {% else %}
+        <tr>
+            <td colspan="5">No upcoming reminders.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
 </table>
 
 {% endblock %}

@@ -3,42 +3,44 @@
 {% block main %}
 
 <!-- Display the page title -->
-<h2>{{ title }}</h2>
+<h1>{{ title }}</h1>
 
 <!-- Display the tasks in a table -->
 <table>
-    <tr>
-        <!-- Link to sort tasks by assignment -->
-        <th>
-            <a href="/sort/{{ title }}?sort=assignment&order={{ order }}">
-                Assignment
-            </a>
-        </th>
+    <tbody>
+        <tr>
+            <!-- Link to sort tasks by assignment -->
+            <th scope="col">
+                <a href="/sort/{{ title }}?sort=assignment&order={{ order }}">
+                    Assignment
+                </a>
+            </th>
 
-        <!-- Link to sort tasks by subject -->
-        <th>
-            <a href="/sort/{{ title }}?sort=subject&order={{ order }}">
-                Subject
-            </a>
-        </th>
-    </tr>
+            <!-- Link to sort tasks by subject -->
+            <th scope="col">
+                <a href="/sort/{{ title }}?sort=subject&order={{ order }}">
+                    Subject
+                </a>
+            </th>
+        </tr>
 
-    <!-- Loop through each task -->
-    {% for task in tasks %}
-    <tr>
-        <!-- Display the assignment name -->
-        <td>{{ task[0] }}</td>
+        <!-- Loop through each task -->
+        {% for task in tasks %}
+        <tr>
+            <!-- Display the assignment name -->
+            <td>{{ task[0] }}</td>
 
-        <!-- Display the subject name -->
-        <td>{{ task[1] }}</td>
-    </tr>
+            <!-- Display the subject name -->
+            <td>{{ task[1] }}</td>
+        </tr>
 
-    {% else %}
-    <!-- Display message if there are no tasks -->
-    <tr>
-        <td colspan="2">No results found.</td>
-    </tr>
-    {% endfor %}
+        {% else %}
+        <!-- Display message if there are no tasks -->
+        <tr>
+            <td colspan="2">No results found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 
 </table>
 

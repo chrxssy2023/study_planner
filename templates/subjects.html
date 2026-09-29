@@ -1,54 +1,59 @@
 {% extends "base.html" %}
+
 <!-- Title of page -->
 {% block main %}
-<h2 class="page-title">All Subjects</h2>
 
-<!-- Reminders table -->
+<h1 class="page-title">All Subjects</h1>
+
+<!-- Subjects table -->
 <table>
-    <tr>
-        <!-- Sort by subjet -->
-        <th>
-            <a href="/subjects?sort=subject_name&order={{ order }}">
-                Subject
-            </a>
-        </th>
+    <tbody>
+        <tr>
+            <!-- Sort by subject -->
+            <th scope="col">
+                <a href="/subjects?sort=subject_name&order={{ order }}">
+                    Subject
+                </a>
+            </th>
 
-        <!-- Sort by teacher -->
-        <th>
-            <a href="/subjects?sort=teacher_name&order={{ order }}">
-                Teacher
-            </a>
-        </th>
+            <!-- Sort by teacher -->
+            <th scope="col">
+                <a href="/subjects?sort=teacher_name&order={{ order }}">
+                    Teacher
+                </a>
+            </th>
 
-        <!-- Sort by room -->
-        <th>
-            <a href="/subjects?sort=room&order={{ order }}">
-                Room
-            </a>
-        </th>
+            <!-- Sort by room -->
+            <th scope="col">
+                <a href="/subjects?sort=room&order={{ order }}">
+                    Room
+                </a>
+            </th>
 
-        <!-- Sort by credits -->
-        <th>
-            <a href="/subjects?sort=credits&order={{ order }}">
-                Credits
-            </a>
-        </th>
-    </tr>
+            <!-- Sort by credits -->
+            <th scope="col">
+                <a href="/subjects?sort=credits&order={{ order }}">
+                    Credits
+                </a>
+            </th>
+        </tr>
 
-     <!-- Display each subjects -->
-    {% for row in subjects %}
-    <tr>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-        <td>{{ row[4] }}</td>
-    </tr>
+        <!-- Display each subject -->
+        {% for row in subjects %}
+        <tr>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+        </tr>
 
-    <!-- Shows message if there are no reminders -->
-    {% else %}
-    <tr>
-        <td colspan="4">No subjects found.</td>
-    </tr>
-    {% endfor %}
+        <!-- Shows message if there are no subjects -->
+        {% else %}
+        <tr>
+            <td colspan="4">No subjects found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
 </table>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block main %}
 
 <!-- Title of page -->
-<h2 class="page-title">Notes</h2>
+<h1 class="page-title">Notes</h1>
 
 <!-- Main notes section containing the note list and selected note -->
 <div class="notes">
@@ -11,14 +11,14 @@
     <!-- Displays a list of all notes -->
     <div class="notes-list">
 
-        <h3>My Notes</h3>
+        <h2>My Notes</h2>
 
         <!-- Loop through each note from the database -->
         {% for note in notes %}
 
         <!-- Makes all the notes clickable so user can view each note -->
         <a href="/notes/{{ note[0] }}"
-           class="note {% if selected_note and selected_note[0] == note[0] %}selected{% endif %}">
+            class="note {% if selected_note and selected_note[0] == note[0] %}selected{% endif %}">
 
             <strong>{{ note[1] }}</strong>
 
@@ -55,7 +55,7 @@
             <h2>No notes yet</h2>
 
             <p>You do not have any notes.</p>
-            
+
 
         </div>
 

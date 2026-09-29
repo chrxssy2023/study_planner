@@ -1,62 +1,67 @@
 {% extends "base.html" %}
-<!-- Title of page -->
+
 {% block main %}
-<h2 class="page-title">All Assignments</h2>
 
-<!-- Reminders table -->
+<!-- Title of page -->
+<h1 class="page-title">All Assignments</h1>
+
+<!-- Assignments table -->
 <table>
-    <tr>
-        <!-- Sort by assignments -->
-        <th>
-            <a href="/assignments?sort=assignment_name&order={{ order }}">
-                Assignments
-            </a>
-        </th>
+    <tbody>
+        <tr>
+            <!-- Sort by assignment name -->
+            <th scope="col">
+                <a href="/assignments?sort=assignment_name&order={{ order }}">
+                    Assignments
+                </a>
+            </th>
 
-        <!-- Sort by subject -->
-        <th>
-            <a href="/assignments?sort=subject_name&order={{ order }}">
-                Subjects
-            </a>
-        </th>
+            <!-- Sort by subject -->
+            <th scope="col">
+                <a href="/assignments?sort=subject_name&order={{ order }}">
+                    Subjects
+                </a>
+            </th>
 
-        <!-- Sort by due date -->
-        <th>
-            <a href="/assignments?sort=due_date&order={{ order }}">
-                Due Date
-            </a>
-        </th>
+            <!-- Sort by due date -->
+            <th scope="col">
+                <a href="/assignments?sort=due_date&order={{ order }}">
+                    Due Date
+                </a>
+            </th>
 
-        <!-- Sort by priority -->
-        <th>
-            <a href="/assignments?sort=priority&order={{ order }}">
-                Priority
-            </a>
-        </th>
+            <!-- Sort by priority -->
+            <th scope="col">
+                <a href="/assignments?sort=priority&order={{ order }}">
+                    Priority
+                </a>
+            </th>
 
-        <!-- Sort by status -->
-        <th>
-            <a href="/assignments?sort=status&order={{ order }}">
-                Status
-            </a>
-        </th>
-    </tr>
+            <!-- Sort by status -->
+            <th scope="col">
+                <a href="/assignments?sort=status&order={{ order }}">
+                    Status
+                </a>
+            </th>
+        </tr>
 
-     <!-- Display each subjects -->
-    {% for row in assignments %}
-    <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-        <td>{{ row[4] }}</td>
-    </tr>
+        <!-- Display each assignment -->
+        {% for row in assignments %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+        </tr>
 
-    <!-- Shows message if there are no reminders -->
-    {% else %}
-    <tr>
-        <td colspan="5">No assignments found.</td>
-    </tr>
-    {% endfor %}
+        <!-- Shows message if there are no assignments -->
+        {% else %}
+        <tr>
+            <td colspan="5">No assignments found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
+
 {% endblock %}

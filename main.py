@@ -1,13 +1,9 @@
 """Studyous."""
 
-# Import the Flask tools needed to create pages and handle requests
+# Import the Python tools needed for the website
 import calendar as cal
-from datetime import datetime
-
-# Import SQLite to connect the website to the database
 import sqlite3
-
-# Import the database error type so connection errors can be handled
+from datetime import datetime
 from sqlite3 import Error
 
 from flask import Flask, redirect, render_template, request
@@ -82,9 +78,7 @@ def get_subjects(sort="subject_name", order="asc"):
     return rows
 
 
-def get_assignments(
-    sort="assignment_name", order="asc", incomplete_only=False
-):
+def get_assignments(sort="assignment_name", order="asc", incomplete_only=False):
     """Get assignments and their subject names, then sort them."""
     # List columns that users are allowed to sort by
     allowed_sorts = [
@@ -280,9 +274,7 @@ def render_sortpage(title):
     con.close()
 
     # Send the results to the search page
-    return render_template(
-        "search.html", tasks=tasks, title=title, order=new_order
-    )
+    return render_template("search.html", tasks=tasks, title=title, order=new_order)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -325,9 +317,7 @@ def render_search():
         con.close()
 
     # Display the search results
-    return render_template(
-        "search.html", tasks=tasks, title=title, order="asc"
-    )
+    return render_template("search.html", tasks=tasks, title=title, order="asc")
 
 
 @app.route("/assignments")
@@ -352,7 +342,6 @@ def assignments():
 @app.route("/subjects")
 def subjects():
     """Display all subjects from the database."""
-
     # Get the selected sorting option from the URL
     sort = request.args.get("sort", "subject_name")
     order = request.args.get("order", "asc")
@@ -364,9 +353,7 @@ def subjects():
     subject_list = get_subjects(sort, order)
 
     # Send the subjects to the subjects page
-    return render_template(
-        "subjects.html", subjects=subject_list, order=new_order
-    )
+    return render_template("subjects.html", subjects=subject_list, order=new_order)
 
 
 @app.route("/calendar")
@@ -438,11 +425,13 @@ def notes(note_id=None):
     cur = con.cursor()
 
     # Get all notes and sort them by their creation time
-    cur.execute("""
+    cur.execute(
+        """
         SELECT id, title, note, created_at
         FROM notes
         ORDER BY created_at DESC
-    """)
+    """
+    )
     notes_list = cur.fetchall()
 
     # Start with no selected note
@@ -468,9 +457,7 @@ def notes(note_id=None):
     con.close()
 
     # Send the notes to the notes page
-    return render_template(
-        "notes.html", notes=notes_list, selected_note=selected_note
-    )
+    return render_template("notes.html", notes=notes_list, selected_note=selected_note)
 
 
 @app.route("/theme/<theme>")
@@ -522,9 +509,7 @@ def reminders():
 
     else:
         # Otherwise, display all incomplete assignments as reminders
-        reminder_list = get_assignments(
-            sort, order, incomplete_only=True
-        )
+        reminder_list = get_assignments(sort, order, incomplete_only=True)
         page_title = "All Reminders"
 
     # Send the reminders to the reminders page

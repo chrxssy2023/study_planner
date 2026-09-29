@@ -70,7 +70,7 @@
 }
 
 
-/* COlourblind high contrast colour theme */
+/* Colourblind high contrast colour theme */
 .theme-colourblind {
     --background: #ffffff;
     --header: #0072b2;
@@ -317,7 +317,7 @@ nav a:hover .nav-icon {
 }
 
 
-/* Position the search box and icon */
+/* Position the search box and search button */
 .search-box {
     position: relative;
     display: flex;
@@ -338,8 +338,6 @@ nav a:hover .nav-icon {
 }
 
 
-
-
 /* Border darkens when search bar is selected */
 .search-box input[type="text"]:focus {
     outline: none;
@@ -347,17 +345,36 @@ nav a:hover .nav-icon {
 }
 
 
-/* Add the search icon to the search box */
-.search-icon {
+/* Style the search button */
+.search-button {
     position: absolute;
     right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    pointer-events: none;
+    padding: 0;
+    border: none;
+    background-color: transparent;
     background-image: url("/static/images/search.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
+}
+
+
+/* Hide the search label while keeping it accessible */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 
@@ -494,6 +511,7 @@ main {
 
 
 /* Style the main headings */
+main h1,
 main h2 {
     color: var(--primary);
     margin-bottom: 20px;
@@ -703,7 +721,7 @@ input[type="submit"]:hover {
 /* Highlight current day */
 .day.today {
     background-color: var(--hover);
-    border: 3px solid var(--primary_);
+    border: 1px solid var(--primary);
     font-weight: bold;
     color: var(--primary);
 }
@@ -734,7 +752,7 @@ input[type="submit"]:hover {
 
 
 /* Style the notes list heading */
-.notes-list h3 {
+.notes-list h2 {
     margin: 0;
     padding: 15px;
     color: var(--primary);
