@@ -78,7 +78,11 @@ def get_subjects(sort="subject_name", order="asc"):
     return rows
 
 
-def get_assignments(sort="assignment_name", order="asc", incomplete_only=False):
+def get_assignments(
+    sort="assignment_name",
+    order="asc",
+    incomplete_only=False,
+):
     """Get assignments and their subject names, then sort them."""
     # List columns that users are allowed to sort by
     allowed_sorts = [
@@ -240,6 +244,9 @@ def render_sortpage(title):
     sort = request.args.get("sort")
     order = request.args.get("order", "asc")
 
+    # Get the original search text from the title
+    search = title.replace("Search for ", "")
+
     # Change the order for the next time the user clicks the sort button
     new_order = "desc" if order == "asc" else "asc"
 
@@ -253,28 +260,38 @@ def render_sortpage(title):
     else:
         sort_column = "subjects.subject_name"
 
-    # Select assignments and their subject names
+    # Select matching assignments and subjects, then sort them
     query = f"""
         SELECT assignments.assignment_name, subjects.subject_name
         FROM assignments
         JOIN subjects
         ON assignments.subject_id = subjects.id
+        WHERE assignments.assignment_name LIKE ?
+        OR subjects.subject_name LIKE ?
         ORDER BY {sort_column} {order}
     """
+
+    # Add wildcards so partial words can also be found
+    search = "%" + search + "%"
 
     # Connect to the database
     con = create_connection(DATABASE)
     cur = con.cursor()
 
     # Run the query and get the results
-    cur.execute(query)
+    cur.execute(query, (search, search))
     tasks = cur.fetchall()
 
     # Close the database connection
     con.close()
 
     # Send the results to the search page
-    return render_template("search.html", tasks=tasks, title=title, order=new_order)
+    return render_template(
+        "search.html",
+        tasks=tasks,
+        title=title,
+        order=new_order,
+    )
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -317,7 +334,12 @@ def render_search():
         con.close()
 
     # Display the search results
-    return render_template("search.html", tasks=tasks, title=title, order="asc")
+    return render_template(
+        "search.html",
+        tasks=tasks,
+        title=title,
+        order="asc",
+    )
 
 
 @app.route("/assignments")
@@ -335,7 +357,9 @@ def assignments():
 
     # Send the assignments to the assignments page
     return render_template(
-        "assignments.html", assignments=assignment_list, order=new_order
+        "assignments.html",
+        assignments=assignment_list,
+        order=new_order,
     )
 
 
@@ -353,7 +377,11 @@ def subjects():
     subject_list = get_subjects(sort, order)
 
     # Send the subjects to the subjects page
-    return render_template("subjects.html", subjects=subject_list, order=new_order)
+    return render_template(
+        "subjects.html",
+        subjects=subject_list,
+        order=new_order,
+    )
 
 
 @app.route("/calendar")
@@ -430,7 +458,7 @@ def notes(note_id=None):
         SELECT id, title, note, created_at
         FROM notes
         ORDER BY created_at DESC
-    """
+        """
     )
     notes_list = cur.fetchall()
 
@@ -444,7 +472,7 @@ def notes(note_id=None):
             SELECT id, title, note, created_at
             FROM notes
             WHERE id = ?
-        """,
+            """,
             (note_id,),
         )
         selected_note = cur.fetchone()
@@ -457,7 +485,11 @@ def notes(note_id=None):
     con.close()
 
     # Send the notes to the notes page
-    return render_template("notes.html", notes=notes_list, selected_note=selected_note)
+    return render_template(
+        "notes.html",
+        notes=notes_list,
+        selected_note=selected_note,
+    )
 
 
 @app.route("/theme/<theme>")
@@ -509,7 +541,11 @@ def reminders():
 
     else:
         # Otherwise, display all incomplete assignments as reminders
-        reminder_list = get_assignments(sort, order, incomplete_only=True)
+        reminder_list = get_assignments(
+            sort,
+            order,
+            incomplete_only=True,
+        )
         page_title = "All Reminders"
 
     # Send the reminders to the reminders page
