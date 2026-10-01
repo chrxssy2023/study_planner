@@ -75,14 +75,14 @@
     --background: #ffffff;
     --header: #0072b2;
     --nav: #e69f00;
-    --sidebar: #004B76;
-    --primary: #0C7BDC;
-    --border: #CCCCCC;
-    --light: #F0F8FF;
-    --hover: #E69F00;
+    --sidebar: #005c91;
+    --primary: #0c7bdc;
+    --border: #cccccc;
+    --light: #f0f8ff;
+    --hover: #e69f00;
     --white: #ffffff;
     --text: #000000;
-    --muted: #6E6E6E;
+    --muted: #6e6e6e;
 }
 
 
@@ -131,12 +131,12 @@
 
 
 .theme-colourblind .view-all-button {
-    background-color: #004B76;
+    background-color: #005c91;
 }
 
 
 .theme-colourblind .view-all-button:hover {
-    background-color: #003f63;
+    background-color: #005c91;
 }
 
 
