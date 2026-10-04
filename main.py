@@ -8,6 +8,7 @@ from sqlite3 import Error
 
 from flask import Flask, redirect, render_template, request
 
+
 # Create the Flask application
 app = Flask(__name__)
 
@@ -21,10 +22,10 @@ THEMES = ["pink", "light", "dark", "colourblind"]
 def create_connection(db_file):
     """Create a connection to the SQLite database."""
     try:
-        # Connect to the database.
+        # Connect to the database
         connection = sqlite3.connect(db_file)
 
-        # Return the database connection.
+        # Return the database connection
         return connection
 
     except Error as e:
@@ -36,6 +37,7 @@ def create_connection(db_file):
 
 def get_subjects(sort="subject_name", order="asc"):
     """Get all subjects from the database and sort them."""
+
     # List the columns that users are allowed to sort by
     allowed_sorts = [
         "id",
@@ -49,7 +51,7 @@ def get_subjects(sort="subject_name", order="asc"):
     if sort not in allowed_sorts:
         sort = "subject_name"
 
-    # Change sort order to uppercase.
+    # Change sort order to uppercase
     order = order.upper()
 
     # Only allow ascending or descending sorting
@@ -84,6 +86,7 @@ def get_assignments(
     incomplete_only=False,
 ):
     """Get assignments and their subject names, then sort them."""
+
     # List columns that users are allowed to sort by
     allowed_sorts = [
         "assignment_name",
@@ -97,7 +100,8 @@ def get_assignments(
     if sort not in allowed_sorts:
         sort = "assignment_name"
 
-    # Give each priority a sorting number so High appears before Medium/Low
+    # Give each priority a sorting number
+    # so High appears before Medium and Low
     if sort == "priority":
         order_by = """
             CASE priority
@@ -108,7 +112,8 @@ def get_assignments(
             END
         """
 
-    # Give each status a sorting number so statuses appear in a set order
+    # Give each status a sorting number
+    # so statuses appear in a set order
     elif sort == "status":
         order_by = """
             CASE status
@@ -163,6 +168,7 @@ def get_assignments(
 
 def get_reminder_by_id(assignment_id):
     """Get one incomplete assignment for the reminder detail view."""
+
     # Select one assignment and its subject information
     query = """
         SELECT a.assignment_name, s.subject_name,
@@ -189,6 +195,7 @@ def get_reminder_by_id(assignment_id):
 
 def get_reminders():
     """Get upcoming assignments to display as reminders in the sidebar."""
+
     # Select incomplete assignments and their subject information
     query = """
         SELECT assignments.id,
@@ -223,6 +230,7 @@ def get_reminders():
 @app.context_processor
 def inject_reminders():
     """Make reminders available on every page."""
+
     # Send the reminders to all templates
     return {"reminders": get_reminders()}
 
@@ -230,6 +238,7 @@ def inject_reminders():
 @app.route("/")
 def index():
     """Display the home page."""
+
     # Get a random study quote from the database
     quote = get_quote()
 
@@ -240,6 +249,7 @@ def index():
 @app.route("/sort/<title>")
 def render_sortpage(title):
     """Display search results sorted by assignment or subject."""
+
     # Get the selected sorting option from the URL
     sort = request.args.get("sort")
     order = request.args.get("order", "asc")
@@ -260,6 +270,10 @@ def render_sortpage(title):
     else:
         sort_column = "subjects.subject_name"
 
+    # Only allow ascending or descending sorting
+    if order not in ["asc", "desc"]:
+        order = "asc"
+
     # Select matching assignments and subjects, then sort them
     query = f"""
         SELECT assignments.assignment_name, subjects.subject_name
@@ -272,24 +286,25 @@ def render_sortpage(title):
     """
 
     # Add wildcards so partial words can also be found
-    search = "%" + search + "%"
+    search_value = "%" + search + "%"
 
     # Connect to the database
     con = create_connection(DATABASE)
     cur = con.cursor()
 
-    # Run the query and get the results
-    cur.execute(query, (search, search))
+    # Run the query and get the matching results
+    cur.execute(query, (search_value, search_value))
     tasks = cur.fetchall()
 
     # Close the database connection
     con.close()
 
-    # Send the results to the search page
+    # Send the sorted results to the search page
     return render_template(
         "search.html",
         tasks=tasks,
         title=title,
+        search=search,
         order=new_order,
     )
 
@@ -297,15 +312,25 @@ def render_sortpage(title):
 @app.route("/search", methods=["GET", "POST"])
 def render_search():
     """Search assignments and subjects matching the user's search query."""
-    # Get the search text entered by the user
-    search = request.form.get("search", "").strip()
+
+    # If the search form has just been submitted,
+    # get the search text from the form
+    if request.method == "POST":
+        search = request.form.get("search", "").strip()
+
+        # Redirect to a GET URL containing the search text.
+        # This keeps the search in the URL when the page reloads.
+        return redirect("/search?search=" + search)
+
+    # Get the search text stored in the URL
+    search = request.args.get("search", "").strip()
 
     # Create a title using the search text
     title = "Search for " + search
 
-    # Find assignments or subjects containing the search text
+    # Check if the search is empty
     if not search:
-        # Show no results if the search box is empty
+        # Show no results for an empty or space-only search
         tasks = []
 
     else:
@@ -320,14 +345,14 @@ def render_search():
         """
 
         # Add wildcards so partial words can also be found
-        search = "%" + search + "%"
+        search_value = "%" + search + "%"
 
         # Connect to the database
         con = create_connection(DATABASE)
         cur = con.cursor()
 
         # Run the search using the user's search text
-        cur.execute(query, (search, search))
+        cur.execute(query, (search_value, search_value))
         tasks = cur.fetchall()
 
         # Close the database connection
@@ -338,6 +363,7 @@ def render_search():
         "search.html",
         tasks=tasks,
         title=title,
+        search=search,
         order="asc",
     )
 
@@ -345,6 +371,7 @@ def render_search():
 @app.route("/assignments")
 def assignments():
     """Display all assignments from the database."""
+
     # Get the selected sorting option from the URL
     sort = request.args.get("sort", "assignment_name")
     order = request.args.get("order", "asc")
@@ -366,6 +393,7 @@ def assignments():
 @app.route("/subjects")
 def subjects():
     """Display all subjects from the database."""
+
     # Get the selected sorting option from the URL
     sort = request.args.get("sort", "subject_name")
     order = request.args.get("order", "asc")
@@ -387,6 +415,7 @@ def subjects():
 @app.route("/calendar")
 def calendar():
     """Display a monthly calendar using the selected date."""
+
     # Get the month and year selected by the user
     month = request.args.get("month", type=int)
     year = request.args.get("year", type=int)
@@ -448,6 +477,7 @@ def calendar():
 @app.route("/notes/<int:note_id>")
 def notes(note_id=None):
     """Display the notes page."""
+
     # Connect to the database
     con = create_connection(DATABASE)
     cur = con.cursor()
@@ -495,21 +525,29 @@ def notes(note_id=None):
 @app.route("/theme/<theme>")
 def change_theme(theme):
     """Change the colour theme of the website."""
+
     # Only allow the four available themes
     if theme not in THEMES:
         theme = "pink"
 
+    # Return the user to the exact page they were viewing.
+    # If they were viewing /search?search=r, this keeps that URL.
+    previous_page = request.referrer or "/"
+
+    # Redirect back to the previous page
+    response = redirect(previous_page)
+
     # Save the selected theme in a browser cookie
-    response = redirect(request.referrer or "/")
     response.set_cookie("theme", theme)
 
-    # Return the user to the previous page
+    # Return the previous page using the new theme
     return response
 
 
 @app.route("/reminders")
 def reminders():
     """Display all upcoming reminders."""
+
     # Get the assignment ID if the user selected one reminder
     assignment_id = request.args.get("id", type=int)
 
@@ -559,6 +597,7 @@ def reminders():
 
 def get_quote():
     """Get one random quote from the database."""
+
     # Select one random quote and its author
     query = """
         SELECT quote, author
@@ -578,7 +617,7 @@ def get_quote():
     # Close the database connection
     con.close()
 
-    # Return the quote.
+    # Return the quote
     return quote
 
 

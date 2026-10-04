@@ -2,46 +2,62 @@
 
 {% block main %}
 
-<!-- Display the page title -->
+<!-- Display the search result page title -->
 <h1>{{ title }}</h1>
 
-<!-- Display the tasks in a table -->
+<!-- Display the matching search results in a table -->
 <table>
     <tbody>
+
+        <!-- Display headings for the search results -->
         <tr>
-            <!-- Link to sort tasks by assignment -->
+
+            <!--
+            Sort the current search results by assignment name.
+            The title contains the original search value so the
+            same search results are kept when sorting.
+            -->
             <th scope="col">
                 <a href="/sort/{{ title }}?sort=assignment&order={{ order }}">
                     Assignment
                 </a>
             </th>
 
-            <!-- Link to sort tasks by subject -->
+            <!--
+            Sort the current search results by subject name.
+            The original search is kept when sorting.
+            -->
             <th scope="col">
                 <a href="/sort/{{ title }}?sort=subject&order={{ order }}">
                     Subject
                 </a>
             </th>
+
         </tr>
 
-        <!-- Loop through each task -->
+        <!-- Loop through each matching search result -->
         {% for task in tasks %}
+
         <tr>
+
             <!-- Display the assignment name -->
             <td>{{ task[0] }}</td>
 
             <!-- Display the subject name -->
             <td>{{ task[1] }}</td>
+
         </tr>
 
         {% else %}
-        <!-- Display message if there are no tasks -->
+
+        <!-- Display a message if there are no matching results -->
         <tr>
             <td colspan="2">No results found.</td>
         </tr>
-        {% endfor %}
-    </tbody>
 
+        {% endfor %}
+
+    </tbody>
 </table>
 
 {% endblock %}
